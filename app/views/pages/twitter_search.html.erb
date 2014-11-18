@@ -1,1 +1,12 @@
 <h2>Twitter User Search</h2>
+
+<%= form_tag twitter_user_search_path do %>
+  <%= text_field_tag :search, params[:search], :placeholder => "search twitter users" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if @results %>
+  <% @results.each do |result| %>
+    <p><%= image_tag(result.profile_image_url.to_str) %><%= result.name %></p>
+  <% end %>
+<% end %>
