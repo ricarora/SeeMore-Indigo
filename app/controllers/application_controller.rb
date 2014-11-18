@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   helper :all
   protect_from_forgery with: :exception
+  before_filter :load_tweets
+
+  def load_tweets
+    @tweets = $client.user_search("Bookis")
+  end
 
   private
 
@@ -10,5 +15,6 @@ class ApplicationController < ActionController::Base
     @current_bro ||= User.find_by(id: session[:bro_id])
   end
   helper_method :current_bro
+
 
 end
