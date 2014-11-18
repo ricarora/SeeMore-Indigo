@@ -5,9 +5,10 @@ class SessionController < ApplicationController
     login = Authentication.where(uid: request.env["omniauth.auth"][:uid], provider: request.env["omniauth.auth"][:provider])
     if login.empty?
       # If empty, create a new Authentication/User
-      Authenication.request.env["omniauth.auth"][:uid]
+      # Authenication.request.env["omniauth.auth"][:uid]
     else
       session[:bro_id] = login.first.user.id
+      User.create
     end
 
   end
