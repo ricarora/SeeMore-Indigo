@@ -8,8 +8,11 @@ class PagesController < ApplicationController
   end
 
   def twitter_user_search
-    @results = $client.user_search(params[:search]).first(10)
+    srch = params[:search]
+    if srch.length > 0
+      @results = $client.user_search(srch).first(10)
     # raise
+    end
     render :twitter_search
   end
 
