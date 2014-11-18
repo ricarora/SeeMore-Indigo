@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root "pages#index"
 
-  get "/auth/:provider/callback", to: "session#create"
+  post "/auth/:provider/callback", to: "session#create"
 
 
 
