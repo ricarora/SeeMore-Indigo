@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   root "pages#index"
 
-  get "/auth/:provider/callback", to: "session#create"
+  post "/auth/:provider/callback", to: "session#create"
+
+  get "/sign-out",                 to: "session#destroy",   as: :sign_out
 
   get "/twitter_search", to: "pages#twitter_search", as: :twitter_search
   post "/twitter_search", to: "pages#twitter_user_search", as: :twitter_user_search

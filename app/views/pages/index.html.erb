@@ -1,2 +1,7 @@
 <h1>So stoked to see you bro!</h1>
-<%= link_to "Yo brah, create an account", "/auth/:provider" %>
+
+<% if current_bro %>
+  <%= link_to "Sign out, #{current_bro.name}!", sign_out_path %>
+<% else %>
+  <%= link_to "Yo brah, create an account", "/auth/developer" %>
+<% end %>
