@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: "session#create"
 
+  get "/twitter_search", to: "pages#twitter_search"
 
 
 
