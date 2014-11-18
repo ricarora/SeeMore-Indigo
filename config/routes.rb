@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   post "/auth/:provider/callback", to: "session#create"
 
+  get "/sign-out",                 to: "session#destroy",   as: :sign_out
+
 
 
 
