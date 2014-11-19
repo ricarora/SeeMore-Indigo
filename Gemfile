@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'dotenv-rails', :groups => [:development, :test]
 gem "rails_config"
 #don't forget development group!!!!
 gem 'twitter'
