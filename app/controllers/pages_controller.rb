@@ -11,6 +11,7 @@ class PagesController < ApplicationController
   end
 
   def twitter_user_search
+    @subscription = Subscription.new
     srch = params[:search]
     if srch.length > 0
       @results = $client.user_search(srch).first(10)
