@@ -22,7 +22,7 @@ class PagesController < ApplicationController
   def vimeo_user_search
     srch = params[:search]
     if srch.length > 0
-      @results = Vimeo::Simple::User.likes(srch)
+      @results = Vimeo::Simple::User.info(srch)
     end
     render :vimeo_search
   end
