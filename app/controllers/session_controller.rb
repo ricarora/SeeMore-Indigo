@@ -11,13 +11,13 @@ class SessionController < ApplicationController
       # If empty, create a new Authentication/User
     end
     session[:bro_id] = login.first.user.id
-    redirect_to root_path, notice: "Mi casa es tu casa, brah"
+    redirect_to root_path, notice: "So stoked to see you, bro"
   end
 
   def destroy
     #would reset session be better here?
     session[:bro_id] = nil
-    redirect_to root_path, notice: "Smell ya later, brah"
+    redirect_to root_path, notice: "Smell ya later, bro"
   end
 
 

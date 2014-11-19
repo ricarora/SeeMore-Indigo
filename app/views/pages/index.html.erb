@@ -1,8 +1,3 @@
-<h1>So stoked to see you bro!</h1>
+<%= link_to "Sign out, #{current_bro.name}!", sign_out_path %>
 
-<% if current_bro %>
-  <%= link_to "Sign out, #{current_bro.name}!", sign_out_path %>
-<% else %>
-  Yo bro, make it legit...
-  <%= link_to "Sign up/in", "/auth/developer" %>
-<% end %>
+<h1> Feedora </h1>
