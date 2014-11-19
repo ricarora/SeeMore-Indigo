@@ -17,10 +17,7 @@ class PagesController < ApplicationController
     @tweets = []
     current_bro.subscriptions.each do |subs|
       #later we'll need to check the provider first
-      $client.user_timeline(subs.uid.to_i).each do |tweet|
-        @tweets << tweet.full_text
-        #more info, date, name, pic, array of hashes
-      end
+      @tweets += $client.user_timeline(subs.uid.to_i)
     end
   end
 
