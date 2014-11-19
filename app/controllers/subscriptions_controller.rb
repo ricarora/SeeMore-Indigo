@@ -8,10 +8,12 @@ class SubscriptionsController < ApplicationController
   private
 
   def find_or_create(subs_hash)
-    subscrip = Subscription.where(uid: subs_hash[:uid], provider: subs_hash[:provider] )
-    if subscrip.empty?
+    # TODO: refactor to get a single instance instead of the first thing in the array
+    subscrip = Subscription.where(uid: subs_hash[:uid], provider: subs_hash[:provider] )[0]
+    if subscrip.nil?
       subscrip = Subscription.create(uid: subs_hash[:uid], provider: subs_hash[:provider])
     end
+    # at some point the subscribe button will not exist if bro already has subscription
     unless current_bro.subscriptions.include? subscrip
       current_bro.subscriptions << subscrip
     end

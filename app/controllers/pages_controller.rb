@@ -1,10 +1,11 @@
 class PagesController < ApplicationController
 
   def index
-    unless current_bro
+    if current_bro
+      load_feed
+    else
       render :landing
     end
-    load_feed
   end
 
   def twitter_auth
