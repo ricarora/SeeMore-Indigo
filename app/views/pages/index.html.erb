@@ -1,3 +1,4 @@
-<%= link_to "Sign out, #{current_bro.name}!", sign_out_path %>
+<%= link_to "Sign out", sign_out_path %>
+<%= link_to current_bro.name, show_path(current_bro.id) %>
 
 <h1> Feedora </h1>
