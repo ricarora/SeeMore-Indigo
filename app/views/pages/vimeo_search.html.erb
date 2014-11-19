@@ -5,8 +5,10 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<% if @results %>
-  <% @results.each do |result| %>
-    <p><%= image_tag(result["user_portrait_medium"]) %><%= result["user_name"] %></p>
-  <% end %>
+<% if @results.include? ("display_name")  %>
+  <p><%= image_tag(@results["portrait_medium"]) %></p>
+  <p>Display Name: <%= @results["display_name"] %></p>
+  <p>Username: <%= @results["profile_url"].gsub("https://vimeo.com/", "") %></p>
+<% else %>
+  <p>No results</p>
 <% end %>
