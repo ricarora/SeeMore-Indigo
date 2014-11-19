@@ -1,6 +1,9 @@
 class PagesController < ApplicationController
 
   def index
+    unless current_bro
+      render :landing
+    end
   end
 
   def twitter_auth
