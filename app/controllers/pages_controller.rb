@@ -21,6 +21,8 @@ class PagesController < ApplicationController
     end
   end
 
+  #provider image, user image, username, content
+
   def twitter_user_search
     @subscription = Subscription.new
     srch = params[:search]

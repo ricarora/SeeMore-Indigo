@@ -6,6 +6,13 @@
 
 <ul>
   <% @tweets.each do |tweet| %>
-    <li><%= tweet %></li>
+    <li>
+      <%= image_tag("twitter-64-black.png") %>
+      <!--TODO: Add alt text for accessibility-->
+      <%= image_tag(tweet.user.profile_image_url.to_s) %>
+      <%= time_ago_in_words(tweet.created_at) %> ago
+      <%= tweet.user.name %>
+      @<%= tweet.user.username %>
+      <%= tweet.full_text %></li>
   <% end %>
 </ul>
