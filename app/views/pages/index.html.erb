@@ -3,3 +3,9 @@
 <%= link_to "Search!", twitter_search_path %>
 
 <h1> Feedora </h1>
+
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li><%= tweet %></li>
+  <% end %>
+</ul>

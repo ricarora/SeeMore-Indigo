@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
 
   def create
     find_or_create(params[:subscription])
-    raise
+    redirect_to root_path
   end
 
   private
@@ -12,7 +12,9 @@ class SubscriptionsController < ApplicationController
     if subscrip.empty?
       subscrip = Subscription.create(uid: subs_hash[:uid], provider: subs_hash[:provider])
     end
-    current_bro.subscriptions << subscrip
+    unless current_bro.subscriptions.include? subscrip
+      current_bro.subscriptions << subscrip
+    end
   end
 
 
