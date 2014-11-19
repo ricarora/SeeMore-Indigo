@@ -19,4 +19,12 @@ class PagesController < ApplicationController
     render :twitter_search
   end
 
+  def vimeo_user_search
+    srch = params[:search]
+    if srch.length > 0
+      @results = Vimeo::Simple::Activity.user_did(srch)
+    end
+    render :vimeo_search
+  end
+
 end
