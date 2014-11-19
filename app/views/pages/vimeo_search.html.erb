@@ -5,10 +5,12 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<% if @results.include? ("display_name")  %>
-  <p><%= image_tag(@results["portrait_medium"]) %></p>
-  <p>Display Name: <%= @results["display_name"] %></p>
-  <p>Username: <%= @results["profile_url"].gsub("https://vimeo.com/", "") %></p>
-<% else %>
-  <p>No results</p>
+<% if @results %>
+  <% if @results.include? ("display_name")  %>
+    <p><%= image_tag(@results["portrait_medium"]) %></p>
+    <p>Display Name: <%= @results["display_name"] %></p>
+    <p>Username: <%= @results["profile_url"].gsub("https://vimeo.com/", "") %></p>
+  <% else %>
+    <p>No results</p>
+  <% end %>
 <% end %>
