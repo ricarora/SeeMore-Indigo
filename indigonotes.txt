@@ -1,0 +1,23 @@
+- can we remove helper:all
+- can we remove require twitter
+- bug entering nothing in the search makes bug
+- move the search bar on main page
+  -only allowed to search if logged in
+-display username in search results
+
+
+bro, do you even feed?
+make it legit with...
+
+
+developer logo is "BS"
+
+top bar:
+"get the hook-up" only icons not connected show for connects
+yo, name! (link to your account), sign out
+
+clicking a follow button on search page
+-changes button to unsubscribe
+-does not redirect or refresh
+
+just one search erb page, gives you the option of which provider you want to search
