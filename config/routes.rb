@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   get "/twitter_search", to: "pages#twitter_search", as: :twitter_search
 
   post "/twitter_search", to: "pages#vimeo_user_search", as: :vimeo_user_search
-  post "/twitter_search", to: "pages#twitter_user_search", as: :twitter_user_search
+
+  get  "/vimeo_search", to: "pages#vimeo_search", as: :vimeo_search
+  post "/vimeo_search", to: "pages#twitter_user_search", as: :twitter_user_search
 
 
 
