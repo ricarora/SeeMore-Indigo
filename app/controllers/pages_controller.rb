@@ -34,6 +34,7 @@ class PagesController < ApplicationController
   def add_tweets_to_feed(tweets)
     tweets.each do |tweet|
       @feed << {
+        provider: "twitter",
         provider_image_url: "twitter-64-black.png",
         avatar: tweet.user.profile_image_url.to_s,
         username: "@"+tweet.user.username,
@@ -46,11 +47,12 @@ class PagesController < ApplicationController
   def add_videos_to_feed(videos)
     videos.each do |video|
       @feed << {
+        provider: "vimeo",
         provider_image_url: "vimeo-64-black.png",
         avatar: video["user_portrait_medium"],
         username: video["user_url"].gsub("https://vimeo.com/", ""),
         created_at: video["upload_date"],
-        content: video["url"]
+        content: video["id"]
       }
     end
   end
