@@ -1,12 +1,4 @@
-<h2>Vimeo User Search</h2>
-
-
-<%= form_tag vimeo_user_search_path do %>
-  <%= select_tag "provider", options_for_select([ "Twitter", "Vimeo" ]) %>
-  <%= text_field_tag :search, params[:search], :placeholder => "search for a Vimeo user" %>
-  <%= submit_tag "Search" %>
-<% end %>
-
+<h1>Vimeo Results</h1>
 
 <% if @results %>
   <% if @results.include? ("display_name")  %>
