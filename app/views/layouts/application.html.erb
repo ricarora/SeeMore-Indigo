@@ -8,12 +8,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header class="nav-bar">
+    <span>
+      <%= link_to image_tag("logo-placeholder.png"), root_path, class:"logo" %>
+      <h1>Bronnect</h1>
+    </span>
 
+    <span class="user-header">
+      <%= link_to current_bro.name.capitalize, show_path(current_bro.id) %> |
+      <%= link_to "Sign out", sign_out_path %>
+    </span>
+    <span class="search-header">
+      <%= form_tag user_search_path do %>
+        <%= select_tag "provider", options_for_select([ "Twitter", "Vimeo" ]) %>
+        <%= text_field_tag :search, params[:search], :placeholder => "Search for user" %>
+        <%= submit_tag "Search" %>
+      <% end %>
+    </span>
+  </header>
   <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
     <%= content_tag :div, msg, id: "flash_#{name}" %>
   <% end %>
+  <div class="container">
+    <%= yield %>
+  </div>
 
-<%= yield %>
 
 </body>
 </html>
