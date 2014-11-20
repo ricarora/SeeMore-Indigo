@@ -10,21 +10,17 @@ class PagesController < ApplicationController
 
   end
 
-  def twitter_user_search
+  def user_search
     srch = params[:search]
-    if srch.length > 0
-      @results = $client.user_search(srch).first(10)
-    # raise
+    if params[:provider] == "Twitter" && srch.length > 0
+        @results = $client.user_search(srch).first(10)
+        render :twitter_results
+    elsif params[:provider] == "Vimeo" && srch.length > 0
+      @results = Vimeo::Simple::User.info(srch)
+      render :vimeo_results
+    else
+      render :user_search
     end
-    render :twitter_search
-  end
-
-  def vimeo_user_search
-    srch = params[:search]
-    if srch.length > 0
-      @results = Vimeo::Simple::Activity.user_did(srch)
-    end
-    render :vimeo_search
   end
 
 end

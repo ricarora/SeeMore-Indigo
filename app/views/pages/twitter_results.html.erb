@@ -1,0 +1,7 @@
+<h1>Twitter Results</h1>
+
+<% if @results %>
+  <% @results.each do |result| %>
+    <p><%= image_tag(result.profile_image_url.to_str) %><%= result.name %></p>
+  <% end %>
+<% end %>

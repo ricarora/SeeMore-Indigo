@@ -9,15 +9,10 @@ Rails.application.routes.draw do
   get "/users/:id",                to: "users#show",        as: :show
 
 
-  get "/twitter_search", to: "pages#twitter_search", as: :twitter_search
 
-  post "/twitter_search", to: "pages#vimeo_user_search", as: :vimeo_user_search
+  get "/search", to: "pages#user_search", as: :user_search
 
-  get  "/vimeo_search", to: "pages#vimeo_search", as: :vimeo_search
-  post "/vimeo_search", to: "pages#twitter_user_search", as: :twitter_user_search
-
-
-
+  post "/search", to: "pages#user_search"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
