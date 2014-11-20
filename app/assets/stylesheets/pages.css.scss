@@ -1,3 +1,47 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.nav-bar {
+  width: 100%;
+  height: 80px;
+  margin: 0;
+  padding: 0px;
+  display: inline-block;
+  background-color: green;
+}
+
+.nav-bar h1 {
+  display: inline-block;
+  font-size: 50px;
+  margin-top: 10px;
+  padding-bottom: 0px;
+  margin-left: 100px;
+}
+
+.nav-bar img {
+  margin: 4px 20px;
+  padding: 0;
+  height: 70px;
+  width: auto;
+  position: absolute;
+  top: 0;
+}
+
+.nav-bar span {
+  display: inline-block;
+}
+
+.search-header {
+  float: right;
+
+  margin: 25px 0;
+}
+
+.user-header {
+  float: right;
+  margin: 28px 20px;
+}
+
+.container {
+  margin-top: 30px;
+}
