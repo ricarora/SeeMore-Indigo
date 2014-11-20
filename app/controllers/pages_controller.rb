@@ -25,6 +25,8 @@ class PagesController < ApplicationController
       #when "vimeo"
       end
     end
+    @feed.sort_by! {|item| item[:created_at]}
+    @feed.reverse!
   end
 
   def add_tweets_to_feed(tweets)
