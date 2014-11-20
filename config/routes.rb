@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   root "pages#index"
 
   post "/auth/:provider/callback", to: "session#create"
-
   get "/sign-out",                 to: "session#destroy",   as: :sign_out
 
   get "/users/:id",                to: "users#show",        as: :show
 
+  post "/subscriptions",       to: "subscriptions#create", as: :subscriptions
 
 
   get "/search", to: "pages#user_search", as: :user_search
