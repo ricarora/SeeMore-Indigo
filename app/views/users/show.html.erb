@@ -30,3 +30,10 @@ Twitter, Instagram, Github, Vimeo
 
 <h2> Your Subscriptions </h2>
 <!--TODO: Broify-->
+
+<div class = "profile-subscription">
+  <% @subscriptions.each do |subs| %>
+      <%= image_tag(subs[:pic]) %>
+      <%= subs[:username] %>
+  <% end %>
+</div>
