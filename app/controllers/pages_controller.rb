@@ -20,6 +20,7 @@ class PagesController < ApplicationController
   end
 
   def vimeo_user_search
+    raise
     srch = params[:search]
     if srch.length > 0
       @results = Vimeo::Simple::User.info(srch)
