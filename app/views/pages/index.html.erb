@@ -3,3 +3,15 @@
 <%= link_to "Search!", user_search_path %>
 
 <h1> Feedora </h1>
+
+<ul>
+  <% @feed.each do |item| %>
+    <li>
+      <%= image_tag(item[:provider_image_url]) %>
+      <!--TODO: Add alt text for accessibility-->
+      <%= image_tag(item[:avatar]) %>
+      <%= time_ago_in_words(item[:created_at]) %> ago
+      <%= item[:username] %>
+      <%= item[:content] %></li>
+  <% end %>
+</ul>
