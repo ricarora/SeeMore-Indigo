@@ -1,0 +1,31 @@
+.col-md-2 p {
+  text-align: center;
+}
+
+.col-md-1 {
+  border-left: black solid 4px;
+}
+
+.col-md-1, .col-md-2, .col-md-6 {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.col-md-6 p {
+  font-size: 15pt;
+  text-align: left;
+}
+
+.feed li {
+  list-style-type: none;
+}
+
+.feedora {
+  text-align: center;
+  font-family: serif;
+}
+
+h1.feedora {
+  letter-spacing: 4px;
+  font-size: 40pt;
+}
