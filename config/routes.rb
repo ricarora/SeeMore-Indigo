@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
 
   get "/search", to: "pages#user_search", as: :user_search
+  get "/watup",  to: "pages#landing",     as: :landing_page
 
   post "/search", to: "pages#user_search"
 
