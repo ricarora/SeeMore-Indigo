@@ -5,6 +5,11 @@
     <p><%= image_tag(@results["portrait_medium"]) %></p>
     <p>Display Name: <%= @results["display_name"] %></p>
     <p>Username: <%= @results["profile_url"].gsub("https://vimeo.com/", "") %></p>
+    <%= form_for @subscription do |f| %>
+      <%= f.hidden_field :provider, value: "vimeo" %>
+      <%= f.hidden_field :uid, value: @results["id"].to_s %>
+      <%= f.submit %>
+    <% end %>
   <% else %>
     <p>No results</p>
   <% end %>

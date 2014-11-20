@@ -18,12 +18,14 @@ class PagesController < ApplicationController
     # each item in the feed is a hash that has this:
     # provider_image_url, avatar, username, created_at, content
     @feed = []
-    current_bro.subscriptions.each do |subs|
-      case subs.provider
+    current_bro.subscriptions.each do |subscription|
+      case subscription.provider
       when "twitter"
-        tweets = $client.user_timeline(subs.uid.to_i)
+        tweets = $client.user_timeline(subscription.uid.to_i)
         add_tweets_to_feed(tweets)
-      #when "vimeo"
+      when "vimeo"
+        videos = Vimeo::Simple::User.all_videos(subscription.uid.to_i)
+        add_videos_to_feed(videos)
       end
     end
     @feed.sort_by! {|item| item[:created_at]}
@@ -33,12 +35,26 @@ class PagesController < ApplicationController
   def add_tweets_to_feed(tweets)
     tweets.each do |tweet|
       @feed << {
+        provider: "twitter",
         provider_image_url: "twitter-64-black.png",
         avatar: tweet.user.profile_image_url.to_s,
         username: "@"+tweet.user.username,
         created_at: tweet.created_at,
         content: tweet.full_text
         }
+    end
+  end
+
+  def add_videos_to_feed(videos)
+    videos.each do |video|
+      @feed << {
+        provider: "vimeo",
+        provider_image_url: "vimeo-64-black.png",
+        avatar: video["user_portrait_medium"],
+        username: video["user_url"].gsub("https://vimeo.com/", ""),
+        created_at: video["upload_date"],
+        content: video["id"]
+      }
     end
   end
 

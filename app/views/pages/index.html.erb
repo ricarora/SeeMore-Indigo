@@ -8,6 +8,10 @@
       <%= image_tag(item[:avatar]) %>
       <%= time_ago_in_words(item[:created_at]) %> ago
       <%= item[:username] %>
-      <%= item[:content] %></li>
+      <% if item[:provider] == "twitter" %>
+        <%= item[:content] %></li>
+      <% elsif item[:provider] == "vimeo" %>
+      <iframe src="http://player.vimeo.com/video/<%= item[:content] %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <% end %>
   <% end %>
 </ul>
