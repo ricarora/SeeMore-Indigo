@@ -4,16 +4,3 @@
   <%= text_field_tag :search, params[:search], :placeholder => "search twitter users" %>
   <%= submit_tag "Search" %>
 <% end %>
-
-<% if @results %>
-  <% @results.each do |result| %>
-    <p><%= image_tag(result.profile_image_url.to_str) %><%= result.name %>
-
-      <%= form_for @subscription do |f| %>
-        <%= f.hidden_field :provider, value: "twitter" %>
-        <%= f.hidden_field :uid, value: result.id.to_s %>
-        <%= f.submit %>
-      <% end %>
-    </p>
-  <% end %>
-<% end %>

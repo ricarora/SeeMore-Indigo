@@ -9,11 +9,10 @@ Rails.application.routes.draw do
 
   post "/subscriptions",       to: "subscriptions#create", as: :subscriptions
 
-  get "/twitter_search", to: "pages#twitter_search", as: :twitter_search
-  post "/twitter_search", to: "pages#twitter_user_search", as: :twitter_user_search
 
+  get "/search", to: "pages#user_search", as: :user_search
 
-
+  post "/search", to: "pages#user_search"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
