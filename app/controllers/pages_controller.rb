@@ -4,7 +4,7 @@ class PagesController < ApplicationController
     if current_bro
       load_feed
     else
-      render :landing
+      render :landing, :layout => false
     end
   end
 
