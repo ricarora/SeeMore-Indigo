@@ -1,17 +1,24 @@
 <h1> Feedora </h1>
 
-<ul>
-  <% @feed.each do |item| %>
-    <li>
-      <%= image_tag(item[:provider_image_url]) %>
-      <!--TODO: Add alt text for accessibility-->
-      <%= image_tag(item[:avatar]) %>
-      <%= time_ago_in_words(item[:created_at]) %> ago
-      <%= item[:username] %>
-      <% if item[:provider] == "twitter" %>
-        <%= item[:content] %></li>
-      <% elsif item[:provider] == "vimeo" %>
-      <iframe src="http://player.vimeo.com/video/<%= item[:content] %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      <% end %>
-  <% end %>
-</ul>
+
+<% if @feed.empty? %>
+  <h4>Hey, bro you're all alone... </h4>
+  Hook up with other bros using search!
+  <!--Feel free to edit and improve-->
+<% else %>
+  <ul>
+    <% @feed.each do |item| %>
+      <li>
+        <%= image_tag(item[:provider_image_url]) %>
+        <!--TODO: Add alt text for accessibility-->
+        <%= image_tag(item[:avatar]) %>
+        <%= time_ago_in_words(item[:created_at]) %> ago
+        <%= item[:username] %>
+        <% if item[:provider] == "twitter" %>
+          <%= item[:content] %></li>
+        <% elsif item[:provider] == "vimeo" %>
+        <iframe src="http://player.vimeo.com/video/<%= item[:content] %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <% end %>
+    <% end %>
+  </ul>
+<% end %>
