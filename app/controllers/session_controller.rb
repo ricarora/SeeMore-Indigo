@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: :create
+  skip_before_filter :logged_in, only: :create
 
   #TODO: create a new user and authentication not in sessionContoller
 
@@ -17,7 +18,7 @@ class SessionController < ApplicationController
   def destroy
     #would reset session be better here?
     session[:bro_id] = nil
-    redirect_to root_path, notice: "Smell ya later, bro"
+    redirect_to landing_page_path, notice: "Smell ya later, bro"
   end
 
 

@@ -1,11 +1,12 @@
 class PagesController < ApplicationController
+  skip_before_filter :logged_in, only: :landing
 
   def index
-    if current_bro
-      load_feed
-    else
-      render :landing
-    end
+    load_feed
+  end
+
+  def landing
+    render :layout => false
   end
 
   def twitter_auth
