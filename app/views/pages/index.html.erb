@@ -5,14 +5,13 @@
 <h1> Feedora </h1>
 
 <ul>
-  <% @tweets.each do |tweet| %>
+  <% @feed.each do |item| %>
     <li>
-      <%= image_tag("twitter-64-black.png") %>
+      <%= image_tag(item[:provider_image_url]) %>
       <!--TODO: Add alt text for accessibility-->
-      <%= image_tag(tweet.user.profile_image_url.to_s) %>
-      <%= time_ago_in_words(tweet.created_at) %> ago
-      <%= tweet.user.name %>
-      @<%= tweet.user.username %>
-      <%= tweet.full_text %></li>
+      <%= image_tag(item[:avatar]) %>
+      <%= time_ago_in_words(item[:created_at]) %> ago
+      <%= item[:username] %>
+      <%= item[:content] %></li>
   <% end %>
 </ul>

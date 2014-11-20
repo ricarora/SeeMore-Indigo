@@ -32,7 +32,7 @@ class PagesController < ApplicationController
       @feed << {
         provider_image_url: "twitter-64-black.png",
         avatar: tweet.user.profile_image_url.to_s,
-        username: tweet.user.username,
+        username: "@"+tweet.user.username,
         created_at: tweet.created_at,
         content: tweet.full_text
         }
