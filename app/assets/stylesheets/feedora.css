@@ -2,9 +2,9 @@
   text-align: center;
 }
 
-.col-md-1 {
-  border-left: black solid 4px;
-}
+/*.col-md-1 {
+  border-left: gray solid 4px;
+}*/
 
 .col-md-1, .col-md-2, .col-md-6 {
   margin-bottom: 20px;
@@ -12,7 +12,7 @@
 }
 
 .col-md-6 p {
-  font-size: 15pt;
+  font-size: 14pt;
   text-align: left;
 }
 
@@ -28,4 +28,18 @@
 h1.feedora {
   letter-spacing: 4px;
   font-size: 40pt;
+}
+
+.icon {
+  background-color: #D3D3D3;
+  border-radius: 10px;
+  margin-top: 40%;
+}
+
+.feed-item {
+  border-bottom: #D3D3D3 solid 2px;
+}
+
+.avatar {
+  height: 60px;
 }
