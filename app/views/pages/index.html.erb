@@ -1,24 +1,40 @@
-<h1> Feedora </h1>
-
+<!-- <div class="container"> -->
+<h1 class="feedora">My Feedora</h1>
 
 <% if @feed.empty? %>
   <h4>Hey, bro you're all alone... </h4>
   Hook up with other bros using search!
   <!--Feel free to edit and improve-->
 <% else %>
-  <ul>
-    <% @feed.each do |item| %>
-      <li>
-        <%= image_tag(item[:provider_image_url]) %>
-        <!--TODO: Add alt text for accessibility-->
-        <%= image_tag(item[:avatar]) %>
-        <%= time_ago_in_words(item[:created_at]) %> ago
-        <%= item[:username] %>
-        <% if item[:provider] == "twitter" %>
-          <%= item[:content] %></li>
-        <% elsif item[:provider] == "vimeo" %>
-        <iframe src="http://player.vimeo.com/video/<%= item[:content] %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        <% end %>
-    <% end %>
-  </ul>
+<ul class="feed">
+  <% @feed.each do |item| %>
+    <li>
+      <div class="row feed-item">
+
+          <div class="col-md-2">
+            <div class="icon"><%= image_tag(item[:provider_image_url]) %></div>
+          </div>
+
+          <div class="col-md-3">
+            <!--TODO: Add alt text for accessibility-->
+            <p><%= image_tag(item[:avatar], :class => "avatar") %></p>
+            <p>By <%= item[:username] %></p>
+            <p>Posted <%= time_ago_in_words(item[:created_at]) %> ago</p>
+          </div>
+
+          <div class="col-md-7">
+            <% if item[:provider] == "twitter" %>
+              <p><%= item[:content] %></p>
+            <% elsif item[:provider] == "vimeo" %>
+            <iframe src="http://player.vimeo.com/video/<%= item[:content] %>" width="500" height="281"    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div> <!-- end of col-md-6 class div -->
+
+            <% end %> <!-- end of if twitter/vimeo conditional -->
+        </div> <!-- end of row class div -->
+    </li>
+      <% end %> <!-- end of feed loop -->
+
+</ul>
+
 <% end %>
+<!-- </div> -->
