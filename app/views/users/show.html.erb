@@ -2,8 +2,27 @@
 <!--TODO: Broify-->
 
 <h2>The Deets</h2>
-username: <%= current_bro.name %>
-email: <%= current_bro.email %>
+<div id="hide_profile" style="display:block">
+<div><strong>Username:</strong> <%= current_bro.name %></div>
+<div><strong>Email:</strong> <%= current_bro.email %></div>
+<!-- <%= button_to "Edit Profile", "#edit_profile", action:nil, style:"display:block", onclick: "toggle_visibility('edit_profile');" %> -->
+<%= link_to "Edit Profile", "#edit_profile", class:"btn btn-warning btn-xs", role:"button", onclick:"toggle_visibility('edit_profile');"%>
+</div>
+<div id="edit_profile" style="display:none">
+  <%= form_for current_bro, url: show_path do |f| %>
+  <div class="field">
+    <%= f.label :name, "Username" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+  <div id="submit">
+    <%= f.submit class:"btn btn-warning btn-xs" %>
+  </div>
+  <% end %>
+</div>
 
 <h2>Get the hook up</h2>
 
@@ -11,3 +30,10 @@ Twitter, Instagram, Github, Vimeo
 
 <h2> Your Subscriptions </h2>
 <!--TODO: Broify-->
+
+<div class = "profile-subscription">
+  <% @subscriptions.each do |subs| %>
+      <%= image_tag(subs[:pic]) %>
+      <%= subs[:username] %>
+  <% end %>
+</div>

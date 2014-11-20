@@ -36,7 +36,7 @@ class PagesController < ApplicationController
     tweets.each do |tweet|
       @feed << {
         provider: "twitter",
-        provider_image_url: "twitter-64-black.png",
+        provider_image_url: "twitter-64.png",
         avatar: tweet.user.profile_image_url.to_s,
         username: "@"+tweet.user.username,
         created_at: tweet.created_at,
@@ -49,7 +49,7 @@ class PagesController < ApplicationController
     videos.each do |video|
       @feed << {
         provider: "vimeo",
-        provider_image_url: "vimeo-64-black.png",
+        provider_image_url: "vimeo-64.png",
         avatar: video["user_portrait_medium"],
         username: video["user_url"].gsub("https://vimeo.com/", ""),
         created_at: video["upload_date"],
