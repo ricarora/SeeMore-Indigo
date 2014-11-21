@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+group :development, :test do
+  gem 'rspec-rails'
+end
 gem 'vimeo'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem "rails_config"
