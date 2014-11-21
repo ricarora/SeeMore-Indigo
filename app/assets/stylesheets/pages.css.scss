@@ -7,8 +7,9 @@
   margin: 0;
   padding: 0px;
   // display: inline-block;
-  background-color: green;
-  // position: fixed;
+  background-color: white;
+  position: fixed;
+  border-bottom: 5px solid #4EAE47;
 }
 
 .nav-bar h1 {
@@ -24,7 +25,7 @@
 .nav-bar img {
   margin: 4px 20px;
   padding: 0;
-  height: 70px;
+  height: 75px;
   width: auto;
   // position: absolute;
   top: 0;
@@ -46,13 +47,61 @@
 }
 
 .user-header a {
-  color: lightgreen;
+  color:  #4EAE47;
 }
 
 .container {
-  padding: 100px
+  padding: 100px;
+}
+
+.landing {
+  background-color: white;
+  border-radius: 25px;
+  padding: 10%;
+}
+
+.landing-background {
+  background-color: #5e6666;
+}
+
+.landing-brand h1{
+  display: inline;
+  font-family: 'Graduate', cursive;
+  font-weight: bold;
+  color: #06192E;
+  font-size: 60pt;
+  text-decoration: underline;
+}
+
+.landing-img {
+  height: 200px;
+  display: block;
+  margin: 0 auto;
 }
 
 .subscription-profile div {
   display: inline;
+}
+
+.sub-content {
+  display: inline-block;
+  margin: 15px;
+  padding: 10px;
+}
+
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.tagline {
+  font-weight: bold;
+  font-size: 15pt;
+  color: #898b85;
+}
+
+.sign-in {
+  float: left;
 }

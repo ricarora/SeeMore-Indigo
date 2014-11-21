@@ -1,39 +1,47 @@
-<h1>Account</h1>
+<!-- <h1 style="text-align: center;">Account</h1> -->
 <!--TODO: Broify-->
+<div class="row">
+  <div class="col-md-4">
+    <h2>The Deets</h2>
+    <div id="hide_profile" style="display:block">
+    <div><strong>Username:</strong> <%= current_bro.name %></div>
+    <div><strong>Email:</strong> <%= current_bro.email %></div>
+    <!-- <%= button_to "Edit Profile", "#edit_profile", action:nil, style:"display:block", onclick: "toggle_visibility('edit_profile');" %> -->
+    <%= link_to "Nah brah, that's not right", "#edit_profile", class:"btn btn-warning btn-xs", role:"button", onclick:"toggle_visibility('edit_profile');"%>
+    </div>
+    <div id="edit_profile" style="display:none">
+      <%= form_for current_bro, url: show_path do |f| %>
+      <div class="field">
+        <%= f.label :name, "Username" %>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+      <div id="submit">
+        <%= f.submit "High five, brah!", :class => "btn btn-warning btn-xs" %>
+      </div>
+      <% end %>
+    </div>
+  </div> <!-- close col-md-3 -->
+  <div class="col-md-4">
+    <h2>Get the hook up</h2>
 
-<h2>The Deets</h2>
-<div id="hide_profile" style="display:block">
-<div><strong>Username:</strong> <%= current_bro.name %></div>
-<div><strong>Email:</strong> <%= current_bro.email %></div>
-<!-- <%= button_to "Edit Profile", "#edit_profile", action:nil, style:"display:block", onclick: "toggle_visibility('edit_profile');" %> -->
-<%= link_to "Edit Profile", "#edit_profile", class:"btn btn-warning btn-xs", role:"button", onclick:"toggle_visibility('edit_profile');"%>
-</div>
-<div id="edit_profile" style="display:none">
-  <%= form_for current_bro, url: show_path do |f| %>
-  <div class="field">
-    <%= f.label :name, "Username" %>
-    <%= f.text_field :name %>
+    Twitter, Instagram, Github, Vimeo
   </div>
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
-  <div id="submit">
-    <%= f.submit class:"btn btn-warning btn-xs" %>
-  </div>
-  <% end %>
-</div>
 
-<h2>Get the hook up</h2>
+</div> <!-- close row div -->
+<hr>
+<div class="row">
+  <div class="col-md-10">
+    <h2> Your Bromances </h2>
+      <% @subscriptions.each do |subs| %>
+        <div class="sub-content">
+          <p><%= image_tag(subs[:pic]) %></p>
+          <p><%= subs[:username] %></p>
+        </div>
+      <% end %>
+  </div> <!-- close col-md-10 -->
 
-Twitter, Instagram, Github, Vimeo
-
-<h2> Your Subscriptions </h2>
-<!--TODO: Broify-->
-
-<div class = "profile-subscription">
-  <% @subscriptions.each do |subs| %>
-      <%= image_tag(subs[:pic]) %>
-      <%= subs[:username] %>
-  <% end %>
-</div>
+</div> <!-- close row class -->
