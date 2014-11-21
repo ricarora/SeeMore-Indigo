@@ -9,34 +9,51 @@ class PagesController < ApplicationController
     render :layout => false
   end
 
-  #possibly this should be moved to another controller or in a model (user)???
-  def load_feed
-    # go through each of the user's subscriptions
-    # check that subscription info is up to date (avatar, username, display_name)
+  def update_twitter_subscription(subscription)
+    # update subscription info (avatar_url, username, display_name)
+    user = $client.user(subscription.uid.to_i)
+    subscription.update(avatar_url: user.profile_image_url.to_s,
+                        username: user.screen_name,
+                        display_name: user.name
+                        )
+    raise
     # use the pertinent api to grab feed items
     # add any feed items that are new to the subscription's feed items
     # don't add duplicates
+  end
+
+  #possibly this should be moved to another controller or in a model (user)???
+  def load_feed
+    # go through each of the user's subscriptions
+    current_bro.subscriptions.each do |subscription|
+      case subscription.provider
+      when "twitter"
+        update_twitter_subscription(subscription)
+      when "vimeo"
+      end
+
+
     # fill user's @feed with feed items
     # also sort feed, newest to oldest
 
-
+    end
 
 
     # each item in the feed is a hash that has this:
     # provider_image_url, avatar, username, created_at, content
-    @feed = []
-    current_bro.subscriptions.each do |subscription|
-      case subscription.provider
-      when "twitter"
-        tweets = $client.user_timeline(subscription.uid.to_i)
-        add_tweets_to_feed(tweets)
-      when "vimeo"
-        videos = Vimeo::Simple::User.all_videos(subscription.uid.to_i)
-        add_videos_to_feed(videos)
-      end
-    end
-    @feed.sort_by! {|item| item[:created_at]}
-    @feed.reverse!
+    # @feed = []
+    # current_bro.subscriptions.each do |subscription|
+    #   case subscription.provider
+    #   when "twitter"
+    #     tweets = $client.user_timeline(subscription.uid.to_i)
+    #     add_tweets_to_feed(tweets)
+    #   when "vimeo"
+    #     videos = Vimeo::Simple::User.all_videos(subscription.uid.to_i)
+    #     add_videos_to_feed(videos)
+    #   end
+    # end
+    # @feed.sort_by! {|item| item[:created_at]}
+    # @feed.reverse!
   end
 
   def add_tweets_to_feed(tweets)
