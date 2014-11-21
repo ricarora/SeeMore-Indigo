@@ -5,10 +5,12 @@ class SessionsController < ApplicationController
   #TODO: create a new user and authentication not in sessionContoller
 
   def create
-    login = Authentication.where(uid: request.env["omniauth.auth"][:uid], provider: request.env["omniauth.auth"][:provider])
+    auth_hash = request.env["omniauth.auth"]
+    login = Authentication.where(uid: auth_hash[:uid], provider: auth_hash[:provider])
     if login.empty?
-      new_bro = User.create(name: request.env["omniauth.auth"][:info][:username], email: request.env["omniauth.auth"][:info][:email])
-      login << new_bro.authentications.create(provider: request.env["omniauth.auth"][:provider], uid: request.env["omniauth.auth"][:uid])
+      name = set_name_key( auth_hash[:provider] )
+      new_bro = User.create(name: auth_hash[:info][name], email: auth_hash[:info][:email])
+      login << new_bro.authentications.create(provider: auth_hash[:provider], uid: auth_hash[:uid])
       # If empty, create a new Authentication/User
     end
     session[:bro_id] = login.first.user.id
@@ -19,6 +21,16 @@ class SessionsController < ApplicationController
     #would reset session be better here?
     session[:bro_id] = nil
     redirect_to landing_page_path, notice: "Smell ya later, bro"
+  end
+
+  def set_name_key(name_key)
+    case name_key
+    when "developer"
+      :username
+    when "instagram"
+      :nickname
+    end
+
   end
 
 

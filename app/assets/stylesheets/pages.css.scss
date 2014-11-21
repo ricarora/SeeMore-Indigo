@@ -57,7 +57,7 @@
 .landing {
   background-color: white;
   border-radius: 25px;
-  padding: 10%;
+  padding: 7% 10%;
 }
 
 .landing-background {
@@ -104,4 +104,13 @@
 
 .sign-in {
   float: left;
+}
+
+.login-button {
+  margin-top: 10%;
+}
+
+.login-button img {
+  width: 80px;
+  height: auto;
 }

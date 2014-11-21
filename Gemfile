@@ -44,7 +44,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem "omniauth"
-
+gem "omniauth-instagram"
 group :development do
     gem "better_errors" # These two are just for debugging
     gem "binding_of_caller"
