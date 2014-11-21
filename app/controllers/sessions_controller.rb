@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
     case name_key
     when "developer"
       :username
-    when "instagram"
+    when "instagram", "twitter"
       :nickname
     end
 
