@@ -9,10 +9,6 @@ class PagesController < ApplicationController
     render :layout => false
   end
 
-  def twitter_auth
-
-  end
-
   #possibly this should be moved to another controller or in a model (user)???
   def load_feed
     # each item in the feed is a hash that has this:
