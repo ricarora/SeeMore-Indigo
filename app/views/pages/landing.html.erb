@@ -9,24 +9,27 @@
   <link href='http://fonts.googleapis.com/css?family=Graduate' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div class="container">
+<div class="landing-background vertical-center">
+<div class="container-fluid landing">
   <div class="row">
-
+      <div class="col-xs-12">
       <%= image_tag("bronnect-logo.gif", :class => "landing-img") %>
+      </div>
+  </div>
+  <div class="row">
       <span class="landing-brand"><h1>Bronnect</h1></span>
-
   </div>
 
   <div class="row">
-
-    <h1>bro, do you even feed?</h1>
-
-    <h2>make it legit...</h2>
-
-    <%= link_to "Sign up/in", "/auth/developer" %>
-
+    <div class="col-xs-8 tagline">
+      bro, do you even feed?
+    </div>
+    <div class="col-xs-4 sign-in">
+      <%= link_to "make it legit...", "/auth/developer", :class => "btn btn-danger" %>
+    </div>
   </div>
 
 </div> <!-- /container -->
+</div>
 </body>
 </html>

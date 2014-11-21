@@ -54,17 +54,48 @@
   padding: 100px;
 }
 
-.landing-img {
+.landing {
+  background-color: white;
+  border-radius: 25px;
+  padding: 10%;
+}
 
+.landing-background {
+  background-color: #5e6666;
 }
 
 .landing-brand h1{
   display: inline;
   font-family: 'Graduate', cursive;
+  font-weight: bold;
   color: #06192E;
-  font-size: 50px;
+  font-size: 60pt;
+  text-decoration: underline;
+}
+
+.landing-img {
+  height: 200px;
+  display: block;
+  margin: 0 auto;
 }
 
 .subscription-profile div {
   display: inline;
+}
+
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.tagline {
+  font-weight: bold;
+  font-size: 15pt;
+  color: #898b85;
+}
+
+.sign-in {
+  float: left;
 }
