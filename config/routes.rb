@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   root "pages#index"
 
+  get "/auth/:provider/callback",  to: "sessions#create"
   post "/auth/:provider/callback", to: "sessions#create"
+
   get "/sign-out",                 to: "sessions#destroy",   as: :sign_out
 
   get "/users/:id",                to: "users#show",        as: :show
