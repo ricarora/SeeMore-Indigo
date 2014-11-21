@@ -16,9 +16,10 @@ class PagesController < ApplicationController
                         username: user.screen_name,
                         display_name: user.name
                         )
-    raise
     # use the pertinent api to grab feed items
+    tweets = $client.user_timeline(subscription.uid.to_i)
     # add any feed items that are new to the subscription's feed items
+    raise
     # don't add duplicates
   end
 
