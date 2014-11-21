@@ -11,6 +11,17 @@ class PagesController < ApplicationController
 
   #possibly this should be moved to another controller or in a model (user)???
   def load_feed
+    # go through each of the user's subscriptions
+    # check that subscription info is up to date (avatar, username, display_name)
+    # use the pertinent api to grab feed items
+    # add any feed items that are new to the subscription's feed items
+    # don't add duplicates
+    # fill user's @feed with feed items
+    # also sort feed, newest to oldest
+
+
+
+
     # each item in the feed is a hash that has this:
     # provider_image_url, avatar, username, created_at, content
     @feed = []
@@ -34,7 +45,7 @@ class PagesController < ApplicationController
         provider: "twitter",
         provider_image_url: "twitter-64.png",
         avatar: tweet.user.profile_image_url.to_s,
-        username: "@"+tweet.user.username,
+        username: "@"+tweet.user.screen_name,
         created_at: tweet.created_at,
         content: tweet.full_text
         }
