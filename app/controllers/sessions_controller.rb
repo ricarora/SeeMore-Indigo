@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   #TODO: create a new user and authentication not in sessionContoller
 
   def create
+    raise
     login = Authentication.where(uid: request.env["omniauth.auth"][:uid], provider: request.env["omniauth.auth"][:provider])
     if login.empty?
       new_bro = User.create(name: request.env["omniauth.auth"][:info][:username], email: request.env["omniauth.auth"][:info][:email])
