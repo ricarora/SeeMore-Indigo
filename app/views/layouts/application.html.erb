@@ -6,7 +6,8 @@
   <%= javascript_include_tag 'application'  %>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
-  <link href='http://fonts.googleapis.com/css?family=Graduate' rel='stylesheet' type='text/css'>
+  <!-- <link href='http://fonts.googleapis.com/css?family=Graduate' rel='stylesheet' type='text/css'> -->
+  <%= stylesheet_link_tag "application", 'http://fonts.googleapis.com/css?family=Graduate', :media => "all" %>
 </head>
 <body>
   <header class="nav-bar navbar-fixed-top">
