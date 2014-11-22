@@ -19,7 +19,13 @@ class PagesController < ApplicationController
     # use the pertinent api to grab feed items
     tweets = $client.user_timeline(subscription.uid.to_i)
     # add any feed items that are new to the subscription's feed items
-    raise
+    tweets.each do |tweet|
+      # if not in subscription.feed_items make a new feed_item and add it
+      unless subscription.feed_items.find_by_post_id(tweet.id)
+        raise
+        subscription.feed_items.create()
+      end
+    end
     # don't add duplicates
   end
 
