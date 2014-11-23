@@ -6,38 +6,37 @@
   height: 100px;
   margin: 0;
   padding: 0px;
-  // display: inline-block;
   background-color: white;
   position: fixed;
   border-bottom: 5px solid #4EAE47;
-}
-
-.nav-bar h1 {
-  display: inline-block;
-  font-size: 50px;
-  margin-top: 20px;
-  padding-bottom: 0px;
-  margin-left: 100px;
-  font-family: 'Graduate', cursive;
-  color: #06192E;
-}
-
-.nav-bar img {
-  margin: 4px 20px;
-  padding: 0;
-  height: 75px;
-  width: auto;
-  // position: absolute;
-  top: 0;
 }
 
 .nav-bar span {
   display: inline-block;
 }
 
+.brand-header {
+  margin-left: 20px;
+}
+
+.brand-title {
+  display: inline-block;
+  font-size: 50px;
+  font-weight: bold;
+  text-decoration: underline;
+  font-family: 'Graduate', cursive;
+  color: #06192E;
+  padding-top: 10px;
+}
+
+.brand-img {
+  height: 75px;
+  margin-top: -53px;
+  margin-right: -16px;
+}
+
 .search-header {
   float: right;
-
   margin: 25px 0;
 }
 
