@@ -40,6 +40,11 @@
         <div class="sub-content">
           <p><%= image_tag(subs[:pic]) %></p>
           <p><%= subs[:username] %></p>
+          <%= form_for subs do |f| %>
+            <%= f.hidden_field :uid, value: subs.uid.to_s %>
+            <%= f.hidden_field :provider, value: subs.provider %>
+            <%= f.submit "Unsubscribe" %>
+          <% end %>
         </div>
       <% end %>
   </div> <!-- close col-md-10 -->
