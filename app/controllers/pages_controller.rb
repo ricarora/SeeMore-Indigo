@@ -56,7 +56,6 @@ class PagesController < ApplicationController
                                        post_id: instagram[:id].to_s)
       end
     end
-    raise
   end
 
   #possibly this should be moved to another controller or in a model (user)???
