@@ -9,6 +9,16 @@ class SubscriptionsController < ApplicationController
 
   end
 
+  #this destroys the connection between a subscription and a user, but not the actual subscription
+  def destroy
+    # sub_params = params[:subscription]
+    subs = Subscription.where(uid: params[:uid], provider: params[:provider])[0]
+    if current_bro.subscriptions.include? subs
+      current_bro.subscriptions.destroy(subs.id)
+    end
+    redirect_to :back
+  end
+
   private
 
   def find_or_create(subs_hash)
