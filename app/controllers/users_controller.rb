@@ -10,6 +10,10 @@ class UsersController < ApplicationController
       when "vimeo"
         vimeo_user = Vimeo::Simple::User.info(subs.uid)
         { pic: vimeo_user["portrait_medium"], username: vimeo_user["profile_url"].gsub("https://vimeo.com/", "") }
+      when "instagram"
+        insta_client = Instagram.client(:access_token => session[:access_token])
+        insta_user = insta_client.user(subs.uid)
+        { pic: insta_user.profile_picture, username: insta_user.username }
       end
     end
   end

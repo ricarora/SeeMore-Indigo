@@ -3,41 +3,46 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .nav-bar {
   width: 100%;
-  height: 100px;
+  height: 80px;
   margin: 0;
   padding: 0px;
-  // display: inline-block;
   background-color: white;
   position: fixed;
-  border-bottom: 5px solid #4EAE47;
-}
-
-.nav-bar h1 {
-  display: inline-block;
-  font-size: 50px;
-  margin-top: 20px;
-  padding-bottom: 0px;
-  margin-left: 100px;
-  font-family: 'Graduate', cursive;
-  color: #06192E;
-}
-
-.nav-bar img {
-  margin: 4px 20px;
-  padding: 0;
-  height: 75px;
-  width: auto;
-  // position: absolute;
-  top: 0;
+  border-bottom: 10px solid #06192E;
 }
 
 .nav-bar span {
   display: inline-block;
 }
 
+.brand-header {
+  position: fixed;
+  margin-top: 20px;
+  margin-left: 25px;
+  background: #ACB6BC;
+  border: 10px solid #06192E;
+  border-radius: 40px 40px 40px 40px;
+  padding-right: 25px;
+}
+
+.brand-title {
+  display: inline-block;
+  font-size: 45px;
+  font-weight: bold;
+  text-decoration: underline;
+  font-family: 'Graduate', cursive;
+  color: #06192E;
+  padding-top: 10px;
+}
+
+.brand-img {
+  height: 70px;
+  margin-top: -64px;
+  margin-right: -16px;
+}
+
 .search-header {
   float: right;
-
   margin: 25px 0;
 }
 
@@ -106,6 +111,13 @@
   float: left;
 }
 
+
+.no_prof_pic {
+  width: 75px;
+  height: 75px;
+  background-color: gray;
+}
+
 .login-button {
   margin-top: 10%;
 }
@@ -118,4 +130,13 @@
 .loginlogo {
   display: inline-block;
   margin: 0 7%;
+}
+
+#flash-msg {
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  left: 150px;
+  color: #585859;
+  float: right;
 }

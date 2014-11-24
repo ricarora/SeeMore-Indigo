@@ -13,7 +13,7 @@
 <div class="container-fluid landing">
   <div class="row">
       <div class="col-xs-12">
-      <%= image_tag("bronnect-logo.gif", :class => "landing-img") %>
+      <%= image_tag("muscle.png", :class => "landing-img") %>
       </div>
   </div>
   <div class="row">
@@ -22,7 +22,13 @@
 
   <div class="row">
     <div class="col-xs-8 tagline">
-      bro, do you even feed?
+      <% if flash.empty? %>
+        bro, do you even feed?
+      <% else %>
+        <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
+          <%= content_tag :div, msg %>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-xs-4 sign-in">
       <%= link_to "make it legit...", "/auth/developer", :class => "btn btn-danger" %>

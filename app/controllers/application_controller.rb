@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # def insta_client
+  #   insta_client ||= Instagram.client(:access_token => session[:access_token])
+  # end
+
   def current_bro
     @current_bro ||= User.find_by(id: session[:bro_id])
   end

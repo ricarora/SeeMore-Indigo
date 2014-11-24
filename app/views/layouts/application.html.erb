@@ -11,9 +11,14 @@
 </head>
 <body>
   <header class="nav-bar navbar-fixed-top">
-    <span>
-      <%= link_to image_tag("bronnect-logo.gif"), root_path, :class => "logo" %>
-      <h1>Bronnect</h1>
+    <span class="brand-header">
+      <%= link_to image_tag("muscle.png", :class => "brand-img"), root_path, :class => "logo" %>
+      <h1 class="brand-title">Bronnect</h1>
+      <div id="flash-msg">
+        <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+        <% end %>
+      </div>
     </span>
 
     <span class="user-header">
@@ -21,17 +26,16 @@
       <%= link_to "My Feedora", root_path %> |
       <%= link_to "Sign out", sign_out_path %>
     </span>
+
     <span class="search-header">
       <%= form_tag user_search_path do %>
-        <%= select_tag "provider", options_for_select([ "Twitter", "Vimeo" ]) %>
+        <%= select_tag "provider", options_for_select([ "Twitter", "Vimeo", "Instagram" ]) %>
         <%= text_field_tag :search, params[:search], :placeholder => "Find bomb ass peeps" %>
         <%= submit_tag "Yo Search" %>
       <% end %>
     </span>
   </header>
-  <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
-    <%= content_tag :div, msg, id: "flash_#{name}" %>
-  <% end %>
+
   <div class="container">
     <%= yield %>
   </div>
