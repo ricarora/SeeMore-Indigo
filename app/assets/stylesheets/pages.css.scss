@@ -133,14 +133,9 @@
 }
 
 #flash-msg {
-  border-bottom: 5px solid #4EAE47;
-  width: 100vw;
-  padding-top: 100px;
-}
-
-#flash_notice {
-  width: auto;
-  background-color: #4EAE47;
-  color: white;
-  padding-left: 200px;
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  left: 150px;
+  color: #585859;
 }
