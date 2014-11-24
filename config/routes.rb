@@ -2,11 +2,13 @@ Rails.application.routes.draw do
 
   root "pages#index"
 
-  post "/auth/:provider/callback", to: "session#create"
-  get "/sign-out",                 to: "session#destroy",   as: :sign_out
+  get "/auth/:provider/callback",  to: "sessions#create"
+  post "/auth/:provider/callback", to: "sessions#create"
+
+  get "/sign-out",                 to: "sessions#destroy",   as: :sign_out
 
   get "/users/:id",                to: "users#show",        as: :show
-  patch "/users/:id",              to: "users#update"      
+  patch "/users/:id",              to: "users#update"
 
   post "/subscriptions",       to: "subscriptions#create", as: :subscriptions
 

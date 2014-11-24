@@ -6,7 +6,8 @@
   <%= javascript_include_tag 'application'  %>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
-  <link href='http://fonts.googleapis.com/css?family=Graduate' rel='stylesheet' type='text/css'>
+  <!-- <link href='http://fonts.googleapis.com/css?family=Graduate' rel='stylesheet' type='text/css'> -->
+  <%= stylesheet_link_tag "application", 'http://fonts.googleapis.com/css?family=Graduate', :media => "all" %>
 </head>
 <body>
   <header class="nav-bar navbar-fixed-top">
@@ -16,7 +17,7 @@
     </span>
 
     <span class="user-header">
-      <%= link_to current_bro.name.capitalize, show_path(current_bro.id) %> |
+      <%= link_to current_bro.name, show_path(current_bro.id) %> |
       <%= link_to "My Feedora", root_path %> |
       <%= link_to "Sign out", sign_out_path %>
     </span>

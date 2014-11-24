@@ -57,7 +57,7 @@
 .landing {
   background-color: white;
   border-radius: 25px;
-  padding: 10%;
+  padding: 7% 10%;
 }
 
 .landing-background {
@@ -106,8 +106,23 @@
   float: left;
 }
 
+
 .no_prof_pic {
   width: 75px;
   height: 75px;
   background-color: gray;
+}
+
+.login-button {
+  margin-top: 10%;
+}
+
+.login-button img {
+  width: 80px;
+  height: auto;
+}
+
+.loginlogo {
+  display: inline-block;
+  margin: 0 7%;
 }
