@@ -7,7 +7,7 @@
     <% if user.profile_pics %>
       <p><%= link_to image_tag(user.profile_pics["sizes"][1]["link"]), user.url %></p> <!-- some users don't have prof pic -->
     <% else %>
-     <%= link_to "<div class='no_prof_pic'></div>".html_safe, user.url %> 
+     <%= link_to "<div class='no_prof_pic'></div>".html_safe, user.url %> <!-- without html_safe, won't render html -->
      <% end %>
     <p>Name: <%= user.name %></p>
 
