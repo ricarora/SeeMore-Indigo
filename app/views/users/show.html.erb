@@ -35,13 +35,23 @@
 <hr>
 <div class="row">
   <div class="col-md-10">
+
     <h2> Your Bromances </h2>
+
       <% @subscriptions.each do |subs| %>
         <div class="sub-content">
           <p><%= image_tag(subs[:pic]) %></p>
           <p><%= subs[:username] %></p>
+
+          <%= form_tag('/subscriptions', method: :delete) do %>
+            <%= hidden_field_tag :uid, subs[:uid] %>
+            <%= hidden_field_tag :provider, subs[:provider] %>
+            <%= submit_tag "Unsubscribe" %>
+          <% end %>
+
         </div>
       <% end %>
+
   </div> <!-- close col-md-10 -->
 
 </div> <!-- close row class -->
