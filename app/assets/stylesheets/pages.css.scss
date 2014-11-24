@@ -51,7 +51,7 @@
 }
 
 .container {
-  padding: 100px;
+  // padding: 100px;
 }
 
 .landing {
@@ -118,4 +118,17 @@
 .loginlogo {
   display: inline-block;
   margin: 0 7%;
+}
+
+#flash-msg {
+  border-bottom: 5px solid #4EAE47;
+  width: 100vw;
+  padding-top: 100px;
+}
+
+#flash_notice {
+  width: auto;
+  background-color: #4EAE47;
+  color: white;
+  padding-left: 200px;
 }

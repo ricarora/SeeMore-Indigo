@@ -29,9 +29,11 @@
       <% end %>
     </span>
   </header>
-  <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
-    <%= content_tag :div, msg, id: "flash_#{name}" %>
-  <% end %>
+  <div id="flash-msg">
+    <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
+      <%= content_tag :div, msg, id: "flash_#{name}" %>
+    <% end %>
+  </div>
   <div class="container">
     <%= yield %>
   </div>
