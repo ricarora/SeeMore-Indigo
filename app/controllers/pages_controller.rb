@@ -61,7 +61,8 @@ class PagesController < ApplicationController
   def user_search
     @subscription = Subscription.new
     srch = params[:search]
-    if srch.length > 0
+    request.env["HTTP_REFERER"]
+    if srch && srch.length > 0
       case params[:provider]
       when "Twitter"
         @results = $client.user_search(srch).first(10)
@@ -69,9 +70,13 @@ class PagesController < ApplicationController
       when "Vimeo"
         @results = Beemo::User.search(srch)
         render :vimeo_results
+      when "Instagram"
+        raise
+        render :instagram_results
       end
     else
-      render :user_search
+      #TODO this will bug if you search for nothing on a search results page
+      redirect_to :back
     end
   end
 

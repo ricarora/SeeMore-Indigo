@@ -24,7 +24,7 @@
 
     <span class="search-header">
       <%= form_tag user_search_path do %>
-        <%= select_tag "provider", options_for_select([ "Twitter", "Vimeo" ]) %>
+        <%= select_tag "provider", options_for_select([ "Twitter", "Vimeo", "Instagram" ]) %>
         <%= text_field_tag :search, params[:search], :placeholder => "Find bomb ass peeps" %>
         <%= submit_tag "Yo Search" %>
       <% end %>
