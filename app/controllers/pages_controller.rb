@@ -76,8 +76,9 @@ class PagesController < ApplicationController
         render :instagram_results
       end
     else
-      #TODO this will bug if you search for nothing on a search results page
-      redirect_to :back
+      # if you use redirect_to :back, it crashes when you search for an empty
+      # string on a search results page
+      redirect_to :root_path
     end
   end
 
