@@ -33,6 +33,7 @@ class UsersController < ApplicationController
     if current_bro.subscriptions.include? subs
       current_bro.subscriptions.destroy(subs.id)
     end
+    redirect_to :back
   end
 
   def update

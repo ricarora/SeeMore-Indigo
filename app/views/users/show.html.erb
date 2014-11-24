@@ -40,7 +40,7 @@
         <div class="sub-content">
           <p><%= image_tag(subs[:pic]) %></p>
           <p><%= subs[:username] %></p>
-          <%= form_tag method: :delete do |f| %>
+          <%= form_tag ("/subscriptions", method: "delete") do |f| %>
             <%= hidden_field_tag :uid, value: subs[:uid] %>
             <%= hidden_field_tag :provider, value: subs[:provider] %>
             <%= submit_tag "Unsubscribe" %>
