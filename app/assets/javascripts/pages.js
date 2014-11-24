@@ -27,14 +27,12 @@ $(function() {
       data: $form.serialize(),
       // dataType: "script",
       success: function() {
-        console.log($(present).val());
         $(present).addClass("btn btn-warning");
         // The text on the button can be changed here. Feel free to edit relevant unsubscribe message.
         $(present).val("Nah, its not right!");
       },
       error: function(err) {
-        console.log(err);
-        alert($(this).data());
+        alert("Error!!");
       },
     });
   });
