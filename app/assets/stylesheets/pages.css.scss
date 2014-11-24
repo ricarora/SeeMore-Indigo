@@ -56,13 +56,13 @@
 }
 
 .container {
-  padding: 100px;
+  // padding: 100px;
 }
 
 .landing {
   background-color: white;
   border-radius: 25px;
-  padding: 10%;
+  padding: 7% 10%;
 }
 
 .landing-background {
@@ -109,4 +109,31 @@
 
 .sign-in {
   float: left;
+}
+
+.login-button {
+  margin-top: 10%;
+}
+
+.login-button img {
+  width: 80px;
+  height: auto;
+}
+
+.loginlogo {
+  display: inline-block;
+  margin: 0 7%;
+}
+
+#flash-msg {
+  border-bottom: 5px solid #4EAE47;
+  width: 100vw;
+  padding-top: 100px;
+}
+
+#flash_notice {
+  width: auto;
+  background-color: #4EAE47;
+  color: white;
+  padding-left: 200px;
 }
