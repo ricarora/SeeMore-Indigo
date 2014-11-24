@@ -61,14 +61,24 @@ class PagesController < ApplicationController
   def user_search
     @subscription = Subscription.new
     srch = params[:search]
-    if params[:provider] == "Twitter" && srch.length > 0
+    request.env["HTTP_REFERER"]
+    if srch && srch.length > 0
+      case params[:provider]
+      when "Twitter"
         @results = $client.user_search(srch).first(10)
         render :twitter_results
-    elsif params[:provider] == "Vimeo" && srch.length > 0
-      @results = Beemo::User.search(srch)
-      render :vimeo_results
+      when "Vimeo"
+        @results = Beemo::User.search(srch)
+        render :vimeo_results
+      when "Instagram"
+        insta_client = Instagram.client(:access_token => session[:access_token])
+        @results = insta_client.user_search(srch)
+        render :instagram_results
+      end
     else
-      render :user_search
+      # if you use redirect_to :back, it crashes when you search for an empty
+      # string on a search results page
+      redirect_to :root_path
     end
   end
 
