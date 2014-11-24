@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+group :development, :test do
+  gem 'rspec-rails'
+end
 gem 'vimeo'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem "rails_config"
@@ -41,8 +44,11 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem "omniauth"
-
+gem "omniauth-instagram"
+gem 'omniauth-twitter'
 group :development do
     gem "better_errors" # These two are just for debugging
     gem "binding_of_caller"
 end
+
+gem 'beemo'

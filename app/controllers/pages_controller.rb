@@ -96,7 +96,7 @@ class PagesController < ApplicationController
         @results = $client.user_search(srch).first(10)
         render :twitter_results
     elsif params[:provider] == "Vimeo" && srch.length > 0
-      @results = Vimeo::Simple::User.info(srch)
+      @results = Beemo::User.search(srch)
       render :vimeo_results
     else
       render :user_search
