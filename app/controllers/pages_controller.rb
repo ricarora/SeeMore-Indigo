@@ -21,11 +21,39 @@ class PagesController < ApplicationController
     # add any feed items that are new to the subscription's feed items
     tweets.each do |tweet|
       # if not in subscription.feed_items make a new feed_item and add it
-      unless subscription.feed_items.find_by_post_id(tweet.id)
-        raise
-        subscription.feed_items.create()
+      unless subscription.feed_items.find_by_post_id(tweet.id.to_s)
+        subscription.feed_items.create(content: tweet.full_text,
+                                       post_time: tweet.created_at,
+                                       post_id: tweet.id)
       end
     end
+    # raise
+    # don't add duplicates
+  end
+
+  def update_vimeo_subscription(subscription)
+    # update subscription info (avatar_url, username, display_name)
+
+    # person = Vimeo::Advanced::Person.new("consumer_key", "consumer_secret", :token => user.token, :secret => user.secret)
+    # user = person.get_info("user_id")
+    user = Vimeo::Simple::User.info(subscription.uid.to_i)
+
+    subscription.update(avatar_url: user["portrait_medium"],
+                        username: user["profile_url"].gsub("https://vimeo.com/", ""),
+                        display_name: user["display_name"]
+                        )
+    # use the pertinent api to grab feed items
+    videos = Vimeo::Simple::User.all_videos(subscription.uid.to_i)
+    # add any feed items that are new to the subscription's feed items
+    tweets.each do |tweet|
+      # if not in subscription.feed_items make a new feed_item and add it
+      unless subscription.feed_items.find_by_post_id(tweet.id.to_s)
+        subscription.feed_items.create(content: tweet.full_text,
+                                       post_time: tweet.created_at,
+                                       post_id: tweet.id)
+      end
+    end
+
     # don't add duplicates
   end
 
@@ -37,6 +65,7 @@ class PagesController < ApplicationController
       when "twitter"
         update_twitter_subscription(subscription)
       when "vimeo"
+        update_vimeo_subscription(subscription)
       end
 
 

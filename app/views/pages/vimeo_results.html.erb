@@ -14,6 +14,9 @@
     <%= form_for @subscription do |f| %>
       <%= f.hidden_field :provider, value: "vimeo" %>
       <%= f.hidden_field :uid, value: user.uid.to_s %>
+      <%= f.hidden_field :username, value: user.url.gsub("https://vimeo.com/", "") %>
+      <%= f.hidden_field :avatar_url, value: user.profile_pics ? user.profile_pics["sizes"][1]["link"] : nil  %>
+      <%= f.hidden_field :display_name, value: user.name %>
       <%= f.submit "Begin a bromance" %>
     <% end %> <!-- end form_for loop -->
     <hr>
