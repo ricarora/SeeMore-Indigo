@@ -2,11 +2,11 @@ class SubscriptionsController < ApplicationController
 
   def create
     find_or_create(params[:subscription])
-    # respond_to do |format|
-    #   format.html { redirect_to root_path }
-    #   format.js
-    # end
-    redirect_to root_path
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.js
+    end
+    # redirect_to root_path
   end
 
   private

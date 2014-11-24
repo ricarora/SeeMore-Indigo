@@ -15,16 +15,24 @@ function toggle_visibility(id) {
 // Ajax for subscribe & unsubscribe
 
 $(function() {
-  $(".search_result").click(function(e) {
+  var $search = $(".search_result");
+  $search.click(function(e) {
     e.preventDefault();
-    var $form = $(this).parents("forms");
+    var value = $(this).siblings("div").children()[1];
+    var $form = $(this).parents("form");
     $.ajax($form.attr("action"), {
-      type: "POST", success: function() {
+      url: "/search",
+      type: "POST",
+      data: $form.serialize(),
+      // dataType: "script",
+      success: function() {
+        console.log($search);
         $(this).addClass("btn btn-warning");
       },
-      error: function() {
-        alert("ERROR!");
-      }
+      error: function(err) {
+        console.log(err);
+        alert($(this).data());
+      },
     });
   });
 
