@@ -50,8 +50,8 @@ class PagesController < ApplicationController
       when "vimeo"
         update_vimeo_subscription(subscription)
       end
-      @feed = current_bro.feed_items
-      @feed.order(post_time: :asc)
+      @feed = current_bro.feed_items.order(post_time: :desc)
+    #  raise
 
     # fill user's @feed with feed items
     # also sort feed, newest to oldest
