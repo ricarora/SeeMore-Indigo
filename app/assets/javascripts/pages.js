@@ -18,6 +18,7 @@ $(function() {
   var $search = $(".search_result");
   $search.click(function(e) {
     e.preventDefault();
+    var present = $(this);
     var value = $(this).siblings("div").children()[1];
     var $form = $(this).parents("form");
     $.ajax($form.attr("action"), {
@@ -26,8 +27,10 @@ $(function() {
       data: $form.serialize(),
       // dataType: "script",
       success: function() {
-        console.log($search);
-        $(this).addClass("btn btn-warning");
+        console.log($(present).val());
+        $(present).addClass("btn btn-warning");
+        // The text on the button can be changed here. Feel free to edit relevant unsubscribe message.
+        $(present).val("Nah, its not right!");
       },
       error: function(err) {
         console.log(err);

@@ -3,10 +3,10 @@ class SubscriptionsController < ApplicationController
   def create
     find_or_create(params[:subscription])
     respond_to do |format|
-      format.html { redirect_to root_path }
+      format.html {render html: "success"}
       format.js
     end
-    # redirect_to root_path
+
   end
 
   private
