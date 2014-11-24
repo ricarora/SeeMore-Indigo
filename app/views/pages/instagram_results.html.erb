@@ -1,0 +1,14 @@
+<h1>Instagram Results</h1>
+
+  <% if @results %>
+  <% @results.each do |result| %>
+    <p>
+      <%= image_tag(result.profile_picture) %><%= result.full_name %>
+        <%= form_for @subscription do |f| %>
+        <%= f.hidden_field :provider, value: "instagram" %>
+        <%= f.hidden_field :uid, value: result.id.to_s %>
+        <%= f.submit "Begin a bromance" %>
+      <% end %>
+    </p>
+  <% end %>
+<% end %>
