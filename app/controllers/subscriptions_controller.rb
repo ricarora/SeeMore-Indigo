@@ -5,6 +5,15 @@ class SubscriptionsController < ApplicationController
     redirect_to root_path
   end
 
+  def destroy
+    # sub_params = params[:subscription]
+    subs = Subscription.where(uid: params[:uid], provider: params[:provider])[0]
+    if current_bro.subscriptions.include? subs
+      current_bro.subscriptions.destroy(subs.id)
+    end
+    redirect_to :back
+  end
+
   private
 
   def find_or_create(subs_hash)

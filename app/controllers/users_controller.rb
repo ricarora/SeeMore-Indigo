@@ -27,15 +27,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    sub_params = params[:subscription]
-    subs = Subscription.where(uid: sub_params[:uid], provider: sub_params[:provider])[0]
-    if current_bro.subscriptions.include? subs
-      current_bro.subscriptions.destroy(subs.id)
-    end
-    redirect_to :back
-  end
-
   def update
     current_bro.update(params.require(:user).permit(:name, :email))
     redirect_to show_path
