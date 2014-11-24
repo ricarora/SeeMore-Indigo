@@ -61,12 +61,15 @@ class PagesController < ApplicationController
   def user_search
     @subscription = Subscription.new
     srch = params[:search]
-    if params[:provider] == "Twitter" && srch.length > 0
+    if srch.length > 0
+      case params[:provider]
+      when "Twitter"
         @results = $client.user_search(srch).first(10)
         render :twitter_results
-    elsif params[:provider] == "Vimeo" && srch.length > 0
-      @results = Beemo::User.search(srch)
-      render :vimeo_results
+      when "Vimeo"
+        @results = Beemo::User.search(srch)
+        render :vimeo_results
+      end
     else
       render :user_search
     end
