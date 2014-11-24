@@ -14,7 +14,11 @@
     <%= form_for @subscription do |f| %>
       <%= f.hidden_field :provider, value: "vimeo" %>
       <%= f.hidden_field :uid, value: user.uid.to_s %>
-      <%= f.submit "Begin a bromance" %>
+      <% if !current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty? %>
+        <%= f.submit "Nah, its not right!", :class => "search_result btn btn-warning" %>
+      <% else %>
+        <%= f.submit "Begin a bromance", :class => "search_result" %>
+      <% end %>
     <% end %> <!-- end form_for loop -->
     <hr>
   <% end %> <!-- end each loop -->
