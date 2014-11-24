@@ -1,16 +1,24 @@
 <h1>Vimeo Results</h1>
 
 <% if @results %>
-  <% if @results.include? ("display_name")  %>
-    <p><%= image_tag(@results["portrait_medium"]) %></p>
-    <p>Display Name: <%= @results["display_name"] %></p>
-    <p>Username: <%= @results["profile_url"].gsub("https://vimeo.com/", "") %></p>
+
+  <% @results.each do |user| %> <!-- Beemo returns an array of hashes of Vimeo users -->
+
+    <% if user.profile_pics %>
+      <p><%= link_to image_tag(user.profile_pics["sizes"][1]["link"]), user.url %></p> <!-- some users don't have prof pic -->
+    <% else %>
+     <%= link_to "<div class='no_prof_pic'></div>".html_safe, user.url %> 
+     <% end %>
+    <p>Name: <%= user.name %></p>
+
     <%= form_for @subscription do |f| %>
       <%= f.hidden_field :provider, value: "vimeo" %>
-      <%= f.hidden_field :uid, value: @results["id"].to_s %>
+      <%= f.hidden_field :uid, value: user.uid.to_s %>
       <%= f.submit "Begin a bromance" %>
-    <% end %>
-  <% else %>
-    <p>No results</p>
-  <% end %>
+    <% end %> <!-- end form_for loop -->
+    <hr>
+  <% end %> <!-- end each loop -->
+
+<% else %>
+  <p>No results</p>
 <% end %>
