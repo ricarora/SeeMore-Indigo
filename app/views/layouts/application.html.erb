@@ -12,13 +12,13 @@
 <body>
   <header class="nav-bar navbar-fixed-top">
     <span class="brand-header">
-      <div id="flash-msg">
-        <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
-          <%= content_tag :div, msg, id: "flash_#{name}" %>
-        <% end %>
-      </div>
       <%= link_to image_tag("muscle.png", :class => "brand-img"), root_path, :class => "logo" %>
       <h1 class="brand-title">Bronnect</h1>
+      <div id="flash-msg">
+        <% flash.each do |name, msg| %> <!-- flash message provided by rails-->
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+        <% end %>
+      </div>
     </span>
 
     <span class="user-header">
