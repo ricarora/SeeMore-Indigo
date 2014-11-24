@@ -21,6 +21,9 @@ class SubscriptionsController < ApplicationController
     unless current_bro.subscriptions.include? subscrip
       current_bro.subscriptions << subscrip
     end
+
+    raise
+    
   end
 
 
