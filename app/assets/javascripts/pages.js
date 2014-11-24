@@ -10,3 +10,22 @@ function toggle_visibility(id) {
   }
   document.getElementById("hide_profile").style.display="none";
 }
+
+
+// Ajax for subscribe & unsubscribe
+
+$(function() {
+  $(".search_result").click(function(e) {
+    e.preventDefault();
+    var $form = $(this).parents("forms");
+    $.ajax($form.attr("action"), {
+      type: "POST", success: function() {
+        $(this).addClass("btn btn-warning");
+      },
+      error: function() {
+        alert("ERROR!");
+      }
+    });
+  });
+
+});

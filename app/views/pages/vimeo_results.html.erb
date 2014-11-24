@@ -8,7 +8,7 @@
     <%= form_for @subscription do |f| %>
       <%= f.hidden_field :provider, value: "vimeo" %>
       <%= f.hidden_field :uid, value: @results["id"].to_s %>
-      <%= f.submit "Begin a bromance" %>
+      <%= f.submit "Begin a bromance", :class => 'search_result' %>
     <% end %>
   <% else %>
     <p>No results</p>
