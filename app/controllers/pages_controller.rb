@@ -71,7 +71,8 @@ class PagesController < ApplicationController
         @results = Beemo::User.search(srch)
         render :vimeo_results
       when "Instagram"
-        raise
+        insta_client = Instagram.client(:access_token => session[:access_token])
+        @results = insta_client.user_search(srch)
         render :instagram_results
       end
     else
