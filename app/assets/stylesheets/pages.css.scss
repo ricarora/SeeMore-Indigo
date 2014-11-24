@@ -3,12 +3,12 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .nav-bar {
   width: 100%;
-  height: 100px;
+  height: 80px;
   margin: 0;
   padding: 0px;
   background-color: white;
   position: fixed;
-  border-bottom: 5px solid #4EAE47;
+  border-bottom: 10px solid #06192E;
 }
 
 .nav-bar span {
@@ -16,12 +16,18 @@
 }
 
 .brand-header {
-  margin-left: 20px;
+  position: fixed;
+  margin-top: 20px;
+  margin-left: 25px;
+  background: #ACB6BC;
+  border: 10px solid #06192E;
+  border-radius: 40px 40px 40px 40px;
+  padding-right: 25px;
 }
 
 .brand-title {
   display: inline-block;
-  font-size: 50px;
+  font-size: 45px;
   font-weight: bold;
   text-decoration: underline;
   font-family: 'Graduate', cursive;
@@ -30,8 +36,8 @@
 }
 
 .brand-img {
-  height: 75px;
-  margin-top: -69px;
+  height: 70px;
+  margin-top: -64px;
   margin-right: -16px;
 }
 
