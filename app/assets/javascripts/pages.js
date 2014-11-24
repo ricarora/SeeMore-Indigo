@@ -10,3 +10,31 @@ function toggle_visibility(id) {
   }
   document.getElementById("hide_profile").style.display="none";
 }
+
+
+// Ajax for subscribe & unsubscribe
+
+$(function() {
+  var $search = $(".search_result");
+  $search.click(function(e) {
+    e.preventDefault();
+    var present = $(this);
+    var value = $(this).siblings("div").children()[1];
+    var $form = $(this).parents("form");
+    $.ajax($form.attr("action"), {
+      url: "/search",
+      type: "POST",
+      data: $form.serialize(),
+      // dataType: "script",
+      success: function() {
+        $(present).addClass("btn btn-warning");
+        // The text on the button can be changed here. Feel free to edit relevant unsubscribe message.
+        $(present).val("Nah, its not right!");
+      },
+      error: function(err) {
+        alert("Error!!");
+      },
+    });
+  });
+
+});

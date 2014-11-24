@@ -7,7 +7,11 @@
         <%= form_for @subscription do |f| %>
         <%= f.hidden_field :provider, value: "instagram" %>
         <%= f.hidden_field :uid, value: result.id.to_s %>
-        <%= f.submit "Begin a bromance" %>
+        <% if !current_bro.subscriptions.where(provider: "instagram", uid: result.id.to_s).empty? %>
+          <%= f.submit "Nah, its not right!", :class => "search_result btn btn-warning" %>
+        <% else %>
+          <%= f.submit "Begin a bromance", :class => "search_result" %>
+        <% end %>
       <% end %>
     </p>
   <% end %>

@@ -2,7 +2,11 @@ class SubscriptionsController < ApplicationController
 
   def create
     find_or_create(params[:subscription])
-    redirect_to root_path
+    respond_to do |format|
+      format.html {render html: "success"}
+      format.js
+    end
+
   end
 
   def destroy
