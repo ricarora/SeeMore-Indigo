@@ -1,7 +1,7 @@
 <!-- <div class="container"> -->
 <h1 class="feedora">My Feedora</h1>
 
-<% if @feed.empty? %>
+<% if @feed.nil? %>
   <h4>Hey, bro you're all alone... </h4>
   Hook up with other bros using search!
   <!--Feel free to edit and improve-->
@@ -12,21 +12,21 @@
       <div class="row feed-item">
 
           <div class="col-md-2">
-            <div class="icon"><%= image_tag(item[:provider_image_url]) %></div>
+            <div class="icon"><%= image_tag(item.subscription.provider + ".png") %></div>
           </div>
 
           <div class="col-md-3">
             <!--TODO: Add alt text for accessibility-->
-            <p><%= image_tag(item[:avatar], :class => "avatar") %></p>
-            <p>By <%= item[:username] %></p>
-            <p>Posted <%= time_ago_in_words(item[:created_at]) %> ago</p>
+            <p><%= image_tag(item.subscription.avatar_url, :class => "avatar") %></p>
+            <p>By <%= item.subscription.username %></p>
+            <p>Posted <%= time_ago_in_words(item.post_time) %> ago</p>
           </div>
 
           <div class="col-md-7">
-            <% if item[:provider] == "twitter" %>
-              <p><%= item[:content] %></p>
-            <% elsif item[:provider] == "vimeo" %>
-            <iframe src="http://player.vimeo.com/video/<%= item[:content] %>" width="500" height="281"    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <% if item.subscription.provider == "twitter" %>
+              <p><%= item.content %></p>
+            <% elsif item.subscription.provider == "vimeo" %>
+            <iframe src="http://player.vimeo.com/video/<%= item.content %>" width="500" height="281"    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
           </div> <!-- end of col-md-6 class div -->
 
             <% end %> <!-- end of if twitter/vimeo conditional -->

@@ -9,52 +9,67 @@ class PagesController < ApplicationController
     render :layout => false
   end
 
-  def twitter_auth
+  def update_twitter_subscription(subscription)
+    user = $client.user(subscription.uid.to_i)
+    subscription.update(avatar_url: user.profile_image_url.to_s,
+                        username: user.screen_name,
+                        display_name: user.name
+                        )
+    tweets = $client.user_timeline(subscription.uid.to_i)
+    tweets.each do |tweet|
+      unless subscription.feed_items.find_by_post_id(tweet.id.to_s)
+        subscription.feed_items.create(content: tweet.full_text,
+                                       post_time: tweet.created_at,
+                                       post_id: tweet.id)
+      end
+    end
+  end
 
+  def update_vimeo_subscription(subscription)
+    user = Vimeo::Simple::User.info(subscription.uid.to_i)
+    subscription.update(avatar_url: user["portrait_medium"],
+                        username: user["profile_url"].gsub("https://vimeo.com/", ""),
+                        display_name: user["display_name"]
+                        )
+    videos = Vimeo::Simple::User.all_videos(subscription.uid.to_i)
+    videos.each do |video|
+      unless subscription.feed_items.find_by_post_id(video["id"].to_s)
+        subscription.feed_items.create(content: video["url"].gsub("https://vimeo.com/", ""),
+                                       post_time: video["upload_date"],
+                                       post_id: video["id"])
+      end
+    end
+  end
+
+  def update_instagram_subscription(subscription)
+    insta_client = Instagram.client(:access_token => session[:access_token])
+    instamedia = insta_client.user_recent_media(subscription.uid.to_i)
+    user = instamedia.first.user
+    subscription.update(avatar_url: user.profile_picture,
+                        username: user.username,
+                        display_name: user.full_name
+                        )
+    instamedia.each do |instagram|
+      unless subscription.feed_items.find_by_post_id(instagram[:id].to_s)
+        subscription.feed_items.create(content: instagram["images"]["low_resolution"]["url"],
+                                       post_time: DateTime.strptime(instagram["created_time"],'%s'),
+                                       post_id: instagram[:id].to_s)
+      end
+    end
   end
 
   #possibly this should be moved to another controller or in a model (user)???
   def load_feed
-    # each item in the feed is a hash that has this:
-    # provider_image_url, avatar, username, created_at, content
-    @feed = []
     current_bro.subscriptions.each do |subscription|
       case subscription.provider
       when "twitter"
-        tweets = $client.user_timeline(subscription.uid.to_i)
-        add_tweets_to_feed(tweets)
+        update_twitter_subscription(subscription)
       when "vimeo"
-        videos = Vimeo::Simple::User.all_videos(subscription.uid.to_i)
-        add_videos_to_feed(videos)
+        update_vimeo_subscription(subscription)
+      when "instagram"
+        update_instagram_subscription(subscription)
       end
-    end
-    @feed.sort_by! {|item| item[:created_at]}
-    @feed.reverse!
-  end
-
-  def add_tweets_to_feed(tweets)
-    tweets.each do |tweet|
-      @feed << {
-        provider: "twitter",
-        provider_image_url: "twitter-64.png",
-        avatar: tweet.user.profile_image_url.to_s,
-        username: "@"+tweet.user.username,
-        created_at: tweet.created_at,
-        content: tweet.full_text
-        }
-    end
-  end
-
-  def add_videos_to_feed(videos)
-    videos.each do |video|
-      @feed << {
-        provider: "vimeo",
-        provider_image_url: "vimeo-64.png",
-        avatar: video["user_portrait_medium"],
-        username: video["user_url"].gsub("https://vimeo.com/", ""),
-        created_at: video["upload_date"],
-        content: video["id"]
-      }
+      @feed = current_bro.feed_items.order(post_time: :desc)
     end
   end
 

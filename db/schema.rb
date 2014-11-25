@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119192916) do
+ActiveRecord::Schema.define(version: 20141124214405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,11 +24,23 @@ ActiveRecord::Schema.define(version: 20141119192916) do
     t.string   "uid"
   end
 
+  create_table "feed_items", force: true do |t|
+    t.text     "content"
+    t.integer  "subscription_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "post_id"
+    t.datetime "post_time"
+  end
+
   create_table "subscriptions", force: true do |t|
     t.string   "provider"
     t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "avatar_url"
+    t.string   "username"
+    t.string   "display_name"
   end
 
   create_table "subscriptions_users", id: false, force: true do |t|
