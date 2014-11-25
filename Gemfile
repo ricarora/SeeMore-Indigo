@@ -7,6 +7,10 @@ gem 'vimeo'
 gem 'instagram'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem "rails_config"
+
+#help with heroku production
+gem 'rails_12factor', group: :production
+
 #don't forget development group!!!!
 gem 'twitter'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
