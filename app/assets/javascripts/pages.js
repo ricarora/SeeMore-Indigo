@@ -29,6 +29,7 @@ $(function() {
     });
   });
 
+
   var $search = $(".search_result");
   $search.click(function(e) {
     e.preventDefault();
@@ -50,3 +51,4 @@ $(function() {
       },
     });
   });
+});
