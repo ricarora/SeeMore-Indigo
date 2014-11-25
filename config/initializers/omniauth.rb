@@ -16,4 +16,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
         :lang => 'pt'
       }
     }
+  provider :github,
+    ENV['GITHUB_CLIENT_ID'], ENV['GITHUB_CLIENT_SECRET']
+
 end
