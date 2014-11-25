@@ -26,10 +26,12 @@
             <% if item.subscription.provider == "twitter" %>
               <p><%= item.content %></p>
             <% elsif item.subscription.provider == "vimeo" %>
-            <iframe src="http://player.vimeo.com/video/<%= item.content %>" width="500" height="281"    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+              <iframe src="http://player.vimeo.com/video/<%= item.content %>" width="500" height="281"    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            <% elsif item.subscription.provider == "instagram" %>
+              <%= image_tag(item.content) %>
           </div> <!-- end of col-md-6 class div -->
 
-            <% end %> <!-- end of if twitter/vimeo conditional -->
+            <% end %> <!-- end of if twitter/vimeo/instagram conditional -->
         </div> <!-- end of row class div -->
     </li>
       <% end %> <!-- end of feed loop -->
