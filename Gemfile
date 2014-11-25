@@ -5,6 +5,7 @@ group :development, :test do
 end
 gem 'vimeo'
 gem 'instagram'
+# gem 'octokit'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem "rails_config"
 
@@ -51,6 +52,7 @@ gem 'spring',        group: :development
 gem "omniauth"
 gem "omniauth-instagram"
 gem 'omniauth-twitter'
+gem "omniauth-github"
 group :development do
     gem "better_errors" # These two are just for debugging
     gem "binding_of_caller"
