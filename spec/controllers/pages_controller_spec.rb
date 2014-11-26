@@ -28,4 +28,15 @@ describe PagesController, :type => :controller do
       # end
     end
   end
+
+  describe  "#user_search" do
+    it 'includes bookis when twitter is searched for "booki"' do
+      puts "******" + User.all.inspect
+      request.session[:bro_id] = User.last.id
+      puts "******" + session[:bro_id].inspect
+      params = {search: "booki", provider: "twitter"}
+      get :user_search, {}, params
+      puts "******" + response.body.inspect
+    end
+  end
 end
