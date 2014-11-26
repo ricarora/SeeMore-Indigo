@@ -5,7 +5,7 @@
         <% @results.each do |result| %>
         <div class="results">
           <div class="results-content">
-            <p><%= link_to image_tag(result.profile_image_url.to_str, :class => "avatar"), "http://www.twitter.com/#{result.username}" %></p>
+            <p><%= link_to image_tag(result.profile_image_url.to_str, :class => "avatar"), "http://www.twitter.com/#{result.username}", :target => "_blank" %></p>
             <p><%= result.name %></p>
             <%= form_for @subscription do |f| %>
             <%= f.hidden_field :provider, value: "twitter" %>

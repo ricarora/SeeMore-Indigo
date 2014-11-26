@@ -4,11 +4,12 @@
   <% if @results %>
 
     <% @results.each do |user| %> <!-- Beemo returns an array of hashes of Vimeo users -->
-
+    <div class="results">
+      <div class="results-content">
       <% if user.profile_pics %>
-        <p><%= link_to image_tag(user.profile_pics["sizes"][1]["link"], :class => "avatar"), user.url %></p>
+        <p><%= link_to image_tag(user.profile_pics["sizes"][1]["link"], :class => "avatar"), user.url, :target => "_blank" %></p>
       <% else %>
-       <%= link_to image_tag('no-prof-pic.jpg', :class => "avatar"), user.url %>
+       <%= link_to image_tag('no-prof-pic.jpg', :class => "avatar"), user.url, :target => "_blank" %>
        <% end %>
       <p>Name: <%= user.name %></p>
 
@@ -26,8 +27,10 @@
         <% end %>
 
       <% end %> <!-- end form_for loop -->
-      <hr>
+      </div>
+    </div>
     <% end %> <!-- end each loop -->
+
   <% else %>
     <p>No results</p>
   <% end %>
