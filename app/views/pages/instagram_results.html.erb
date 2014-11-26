@@ -11,11 +11,10 @@
         <%= f.hidden_field :avatar_url, value: result.profile_picture %>
         <%= f.hidden_field :display_name, value: result.full_name %>
 
-        <% if !current_bro.subscriptions.where(provider: "instagram", uid: result.id.to_s).empty? %>
-          <%= f.submit "Nah, its not right!", :class => "search_result btn btn-warning" %>
-        <% else %>
-          <%= f.submit "Begin a bromance", :class => "search_result" %>
-        <% end %>
+      <%= f.submit "Unsubscribe", :class => "unsearch_result #{ 'hide' if current_bro.subscriptions.where(provider: "instagram", uid: result.id.to_s).empty?}" %>
+
+      <%= f.submit "Begin a bromance", :class => "search_result #{ 'hide' if !current_bro.subscriptions.where(provider: "instagram", uid: result.id.to_s).empty?}" %>
+
       <% end %>
     </p>
   <% end %>

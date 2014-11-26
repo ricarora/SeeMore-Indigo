@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "/watup",  to: "pages#landing",     as: :landing_page
 
   post "/search", to: "pages#user_search"
-  post "/search-edit",      to: "subscriptions#destroy"
+  post "/unsubscribe-searchresult",      to: "subscriptions#destroy"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

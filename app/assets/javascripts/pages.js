@@ -29,14 +29,12 @@ $(function() {
     });
   });
 
-
-  var $search = $(".search_result");
-  $search.click(function(e) {
+//  This will subscribe the result on a search page
+  $(".search_result").click(function(e) {
     e.preventDefault();
-    var present = $(this);
-    var unpresent = $(present).siblings(".unsearch_result");
-    console.log(unpresent);
-    var value = $(this).siblings("div").children()[1];
+    var current = $(this);
+    var current_hidden = $(current).siblings(".unsearch_result");
+    // var value = $(this).siblings("div").children()[1];
     var $form = $(this).parents("form");
     $.ajax($form.attr("action"), {
       url: "/search",
@@ -44,9 +42,8 @@ $(function() {
       data: $form.serialize(),
       // dataType: "script",
       success: function() {
-        $(unpresent).removeClass("hide");
-        $(present).addClass("hide");
-        // The text on the button can be changed here. Feel free to edit relevant unsubscribe message.
+        $(current_hidden).removeClass("hide");
+        $(current).addClass("hide");
       },
       error: function(err) {
         alert("Error!!");
@@ -54,25 +51,25 @@ $(function() {
     });
   });
 
+
+//  This will unsubscribe the result on a search page
   $(".unsearch_result").click(function(e) {
-    e.preventDefault();
-      var present = $(this);
-      var unpresent = $(present).siblings(".search_result");
-      var value = $(this).siblings("div").children()[1];
+    // e.preventDefault();
+      var current = $(this);
+      var current_hidden = $(current).siblings(".search_result");
+      // var value = $(this).siblings("div").children()[1];
       var $form = $(this).parents("form");
       $.ajax($form.attr("action"), {
-        url: "/search-edit",
+        url: "/unsubscribe-searchresult",
         type: "POST",
         data: $form.serialize(),
-        // dataType: "script",
         success: function() {
-          $(unpresent).removeClass("hide");
-          $(present).addClass("hide");
-          // The text on the button can be changed here. Feel free to edit relevant unsubscribe message.
+          $(current_hidden).removeClass("hide");
+          $(current).addClass("hide");
         },
-        error: function(err) {
-          alert("Error!!");
-        },
+        // error: function(err) {
+        //   alert("Error!!");
+        // },
       });
   });
 
