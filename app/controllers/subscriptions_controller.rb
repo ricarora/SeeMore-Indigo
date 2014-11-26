@@ -11,8 +11,8 @@ class SubscriptionsController < ApplicationController
 
   #this destroys the connection between a subscription and a user, but not the actual subscription
   def destroy
-    # sub_params = params[:subscription]
-    subs = Subscription.where(uid: params[:uid], provider: params[:provider])[0]
+    sub_params = params[:subscription]
+    subs = Subscription.where(uid: sub_params[:uid], provider: sub_params[:provider])[0]
     if current_bro.subscriptions.include? subs
       current_bro.subscriptions.destroy(subs.id)
     end
