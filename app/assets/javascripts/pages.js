@@ -15,7 +15,15 @@ function toggle_visibility(id) {
 // Ajax for subscribe & unsubscribe
 
 $(function() {
-  $(".unsubscribe").submit(function(e) {
+
+  var searchForm = $(".search-header").children("form");
+  searchForm.submit(function(e) {
+    if ($("#search").val() === "") {
+      e.preventDefault();
+    }
+  });
+
+  $(".edit-subscription").submit(function(e) {
     e.preventDefault();
     var $form = $(this);
     $.ajax($form.attr("action"), {
@@ -28,6 +36,7 @@ $(function() {
       }
     });
   });
+
 
 //  This will subscribe the result on a search page
   $(".search_result").click(function(e) {
