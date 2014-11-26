@@ -10,17 +10,19 @@ Rails.application.routes.draw do
   get "/users/:id",                to: "users#show",        as: :show
   patch "/users/:id",              to: "users#update"
 
+  #
+  # get "/subscriptions",         to: "subscriptions#destroy"
+  post "/subscriptions",        to: "subscriptions#create", as: :subscriptions
+  # delete "/subscriptions",      to: "subscriptions#destroy"
 
-  get "/subscriptions",         to: "subscriptions#destroy", as: :subscription
-  post "/subscriptions",        to: "subscriptions#create"
-  delete "/subscriptions",      to: "subscriptions#destroy"
+  post "/remove_subscription",    to: "subscriptions#destroy", as: :remove_subscription
 
 
   get "/search", to: "pages#user_search", as: :user_search
   get "/watup",  to: "pages#landing",     as: :landing_page
 
   post "/search", to: "pages#user_search"
-
+  # post "/unsubscribe-searchresult",      to: "subscriptions#destroy"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

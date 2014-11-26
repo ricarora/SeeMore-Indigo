@@ -53,6 +53,7 @@ gem "omniauth"
 gem "omniauth-instagram"
 gem 'omniauth-twitter'
 gem "omniauth-github"
+gem 'httparty'
 group :development do
     gem "better_errors" # These two are just for debugging
     gem "binding_of_caller"
