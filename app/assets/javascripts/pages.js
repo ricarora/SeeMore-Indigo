@@ -37,25 +37,49 @@ $(function() {
     });
   });
 
-  var $search = $(".search_result");
-  $search.click(function(e) {
+
+//  This will subscribe the result on a search page
+  $(".search_result").click(function(e) {
     e.preventDefault();
-    var present = $(this);
-    var value = $(this).siblings("div").children()[1];
+    var current = $(this);
+    var current_hidden = $(current).siblings(".unsearch_result");
+    // var value = $(this).siblings("div").children()[1];
     var $form = $(this).parents("form");
-    $.ajax($form.attr("action"), {
-      url: "/search",
+    $.ajax({
+      url: "/subscriptions",
       type: "POST",
       data: $form.serialize(),
       // dataType: "script",
       success: function() {
-        $(present).addClass("btn btn-warning");
-        // The text on the button can be changed here. Feel free to edit relevant unsubscribe message.
-        $(present).val("Nah, its not right!");
+        $(current_hidden).removeClass("hide");
+        $(current).addClass("hide");
       },
       error: function(err) {
         alert("Error!!");
       },
     });
   });
+
+
+//  This will unsubscribe the result on a search page
+  $(".unsearch_result").click(function(e) {
+      e.preventDefault();
+      var current = $(this);
+      var current_hidden = $(current).siblings(".search_result");
+      // var value = $(this).siblings("div").children()[1];
+      var $form = $(this).parents("form");
+      $.ajax({
+        url: "/remove_subscription",
+        type: "POST",
+        data: $form.serialize(),
+        success: function() {
+          $(current_hidden).removeClass("hide");
+          $(current).addClass("hide");
+        },
+        error: function(err) {
+          alert("Error!!");
+        },
+      });
+  });
+
 });
