@@ -29,7 +29,7 @@ class PagesController < ApplicationController
     else
       # if you use redirect_to :back, it crashes when you search for an empty
       # string on a search results page
-      redirect_to :root_path
+      redirect_to root_path
     end
   end
 
