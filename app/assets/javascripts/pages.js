@@ -23,6 +23,20 @@ $(function() {
     }
   });
 
+  $(".unsubscribe").submit(function(e) {
+    e.preventDefault();
+    var $form = $(this);
+    $.ajax($form.attr("action"), {
+      data: $form.serialize(),
+      success: function() {
+        $form.parent().hide();
+      },
+      error: function() {
+        alert("Error!");
+      }
+    });
+  });
+
   var $search = $(".search_result");
   $search.click(function(e) {
     e.preventDefault();
@@ -44,5 +58,4 @@ $(function() {
       },
     });
   });
-
 });
