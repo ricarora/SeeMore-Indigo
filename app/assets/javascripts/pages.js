@@ -45,8 +45,8 @@ $(function() {
     var current_hidden = $(current).siblings(".unsearch_result");
     // var value = $(this).siblings("div").children()[1];
     var $form = $(this).parents("form");
-    $.ajax($form.attr("action"), {
-      url: "/search",
+    $.ajax({
+      url: "/subscriptions",
       type: "POST",
       data: $form.serialize(),
       // dataType: "script",
@@ -63,22 +63,22 @@ $(function() {
 
 //  This will unsubscribe the result on a search page
   $(".unsearch_result").click(function(e) {
-    // e.preventDefault();
+      e.preventDefault();
       var current = $(this);
       var current_hidden = $(current).siblings(".search_result");
       // var value = $(this).siblings("div").children()[1];
       var $form = $(this).parents("form");
-      $.ajax($form.attr("action"), {
-        url: "/unsubscribe-searchresult",
+      $.ajax({
+        url: "/remove_subscription",
         type: "POST",
         data: $form.serialize(),
         success: function() {
           $(current_hidden).removeClass("hide");
           $(current).addClass("hide");
         },
-        // error: function(err) {
-        //   alert("Error!!");
-        // },
+        error: function(err) {
+          alert("Error!!");
+        },
       });
   });
 
