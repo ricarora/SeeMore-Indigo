@@ -10,40 +10,37 @@ describe PagesController, :type => :controller do
       end
     end
     context "user is logged in" do
-      # before { session[:bro_id] = 1 }
-      # This test is failing, still need more research, feel free to work on this.
-      # This is more approachable than the test on sessions_controller_spec.
       it "it is successful" do
         user = User.create
         session[:bro_id] = user.id
-        # get :index, {}, {:bro_id => 1}
-        # puts session.inspect
         get :index
-        puts "*******************"
-        puts User.all.inspect
-        # puts response.body.inspect
-        # expect(response).to render_template("index")
         expect(response.status).to eq 200
       end
       it "there is a user" do
         get :index
         expect(User.count).to eq 1
       end
-      # it "there is a  current user named 'meow'" do
-      #   get :index
-      #   expect(current_bro.name).to eq "meow"
-      # end
+      it "loads the user's feed" do
+        user = User.create
+        subscription = Subscription.create
+        subscription.feed_items.create
+        user.subscriptions << subscription
+        session[:bro_id] = user.id
+
+        get :index
+        expect(assigns(:feed)).to_not be_nil
+      end
     end
   end
-
   describe  "#user_search" do
-    xit 'includes bookis when twitter is searched for "booki"' do
-      user = User.create
-      session[:bro_id] = user.id
-      params = {search: "booki", provider: "twitter"}
-      get :user_search, {}, params
-      render :twitter_results
-      puts "******" + response.body.inspect
+    context "user is logged in" do
+      xit "renders twitter search results when twitter is searched" do
+        user = User.create
+        session[:bro_id] = user.id
+        get :user_search, {}, {provider: "twitter", search: "something"}
+        puts "******" + response.inspect
+        expect(response).to render_template(:twitter_results)
+      end
     end
   end
 end
