@@ -1,22 +1,28 @@
 <h1>Instagram Results</h1>
+<div class="row">
+  <div class="col-md-11">
+    <% if @results %>
+    <% @results.each do |result| %>
+      <div class="results">
+        <div class="results-content">
+        <p><%= link_to image_tag(result.profile_picture, :class => "avatar"), "http://www.instagram.com/#{result.username}", :target => "_blank" %></p>
+        <p><%= result.full_name %></p>
+          <%= form_for @subscription do |f| %>
+          <%= f.hidden_field :provider, value: "instagram" %>
+          <%= f.hidden_field :uid, value: result.id.to_s %>
+          <%= f.hidden_field :username, value: result.username %>
+          <%= f.hidden_field :avatar_url, value: result.profile_picture %>
+          <%= f.hidden_field :display_name, value: result.full_name %>
 
-  <% if @results %>
-  <% @results.each do |result| %>
-    <p>
-      <%= image_tag(result.profile_picture) %><%= result.full_name %>
-        <%= form_for @subscription do |f| %>
-        <%= f.hidden_field :provider, value: "instagram" %>
-        <%= f.hidden_field :uid, value: result.id.to_s %>
-        <%= f.hidden_field :username, value: result.username %>
-        <%= f.hidden_field :avatar_url, value: result.profile_picture %>
-        <%= f.hidden_field :display_name, value: result.full_name %>
-
-        <% if !current_bro.subscriptions.where(provider: "instagram", uid: result.id.to_s).empty? %>
-          <%= f.submit "Nah, its not right!", :class => "search_result btn btn-warning" %>
-        <% else %>
-          <%= f.submit "Begin a bromance", :class => "search_result" %>
+          <% if !current_bro.subscriptions.where(provider: "instagram", uid: result.id.to_s).empty? %>
+            <%= f.submit "Nah, its not right!", :class => "search_result btn btn-warning" %>
+          <% else %>
+            <%= f.submit "Begin a bromance", :class => "search_result" %>
+          <% end %>
         <% end %>
-      <% end %>
-    </p>
+      </div>
+    </div>
   <% end %>
 <% end %>
+</div>
+</div>
