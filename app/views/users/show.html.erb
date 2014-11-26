@@ -40,12 +40,16 @@
 
       <% @subscriptions.each do |subs| %>
       <div class="sub-content">
-        <%= image_tag(subs.avatar_url) %>
-        <%= subs.username %>
+        <% if subs.avatar_url != "" %>
+          <%= image_tag(subs.avatar_url, :class => "avatar") %>
+        <% else %>
+          <%= image_tag("no-prof-pic.jpg", :class => "avatar") %>
+        <% end %>
+        <p><%= subs.username %></p>
         <%= form_for subs, method: :delete, class: "unsubscribe" do |f|%>
           <%= f.hidden_field :uid, value: subs.uid %>
           <%= f.hidden_field :provider, value: subs.provider %>
-        <%= f.submit "Unsubscribe" %>
+        <p><%= f.submit "Unsubscribe" %></p>
         <% end %>
       </div>
 
