@@ -45,7 +45,7 @@
         <%= form_for subs, method: :delete, class: "unsubscribe" do |f|%>
           <%= f.hidden_field :uid, value: subs.uid %>
           <%= f.hidden_field :provider, value: subs.provider %>
-        <%= f.submit "Unsubscribe" %>
+        <%= f.submit subs.unsubscribe_msg %>
         <% end %>
       </div>
 
