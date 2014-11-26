@@ -23,7 +23,7 @@ $(function() {
     }
   });
 
-  $(".unsubscribe").submit(function(e) {
+  $(".edit-subscription").submit(function(e) {
     e.preventDefault();
     var $form = $(this);
     $.ajax($form.attr("action"), {
