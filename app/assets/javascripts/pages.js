@@ -34,6 +34,8 @@ $(function() {
   $search.click(function(e) {
     e.preventDefault();
     var present = $(this);
+    var unpresent = $(present).siblings(".unsearch_result");
+    console.log(unpresent);
     var value = $(this).siblings("div").children()[1];
     var $form = $(this).parents("form");
     $.ajax($form.attr("action"), {
@@ -42,13 +44,36 @@ $(function() {
       data: $form.serialize(),
       // dataType: "script",
       success: function() {
-        $(present).addClass("btn btn-warning");
+        $(unpresent).removeClass("hide");
+        $(present).addClass("hide");
         // The text on the button can be changed here. Feel free to edit relevant unsubscribe message.
-        $(present).val("Nah, its not right!");
       },
       error: function(err) {
         alert("Error!!");
       },
     });
   });
+
+  $(".unsearch_result").click(function(e) {
+    e.preventDefault();
+      var present = $(this);
+      var unpresent = $(present).siblings(".search_result");
+      var value = $(this).siblings("div").children()[1];
+      var $form = $(this).parents("form");
+      $.ajax($form.attr("action"), {
+        url: "/search-edit",
+        type: "POST",
+        data: $form.serialize(),
+        // dataType: "script",
+        success: function() {
+          $(unpresent).removeClass("hide");
+          $(present).addClass("hide");
+          // The text on the button can be changed here. Feel free to edit relevant unsubscribe message.
+        },
+        error: function(err) {
+          alert("Error!!");
+        },
+      });
+  });
+
 });
