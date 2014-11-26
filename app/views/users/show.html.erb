@@ -42,7 +42,7 @@
       <div class="sub-content">
         <%= image_tag(subs.avatar_url) %>
         <%= subs.username %>
-        <%= form_for subs, method: :delete, class: "unsubscribe" do |f|%>
+        <%= form_for subs, url: remove_subscription_path, method: :post, class: "unsubscribe" do |f|%>
           <%= f.hidden_field :uid, value: subs.uid %>
           <%= f.hidden_field :provider, value: subs.provider %>
         <%= f.submit subs.unsubscribe_msg %>
