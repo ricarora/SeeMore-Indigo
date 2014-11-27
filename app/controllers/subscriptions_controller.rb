@@ -16,7 +16,10 @@ class SubscriptionsController < ApplicationController
     if current_bro.subscriptions.include? subs
       current_bro.subscriptions.destroy(subs.id)
     end
-    redirect_to :back
+    respond_to do |format|
+      format.html {render html: "unsubscribe"}
+      format.js
+    end
   end
 
   private
@@ -25,16 +28,25 @@ class SubscriptionsController < ApplicationController
     # TODO: refactor to get a single instance instead of the first thing in the array
     subscrip = Subscription.where(uid: subs_hash[:uid], provider: subs_hash[:provider] )[0]
     if subscrip.nil?
-      subscrip = Subscription.create(uid: subs_hash[:uid],
-                                     provider: subs_hash[:provider],
-                                     avatar_url: subs_hash[:avatar_url],
-                                     username: subs_hash[:username],
-                                     display_name: subs_hash[:name])
+      # if subs_hash[:provider] == "instagram" && insta_user_is_private?(subs_hash[:uid])
+      #     #print error message
+      # else
+        subscrip = Subscription.create(uid: subs_hash[:uid],
+                                       provider: subs_hash[:provider],
+                                       avatar_url: subs_hash[:avatar_url],
+                                       username: subs_hash[:username],
+                                       display_name: subs_hash[:name])
+      # end
     end
     # at some point the subscribe button will not exist if bro already has subscription
     unless current_bro.subscriptions.include? subscrip
       current_bro.subscriptions << subscrip
     end
+  end
+
+  def insta_user_is_private?(uid)
+    response = HTTParty.get('https://api.instagram.com/v1/users/#{uid}/relationship')
+    response.code == 400 ? true : false
   end
 
 

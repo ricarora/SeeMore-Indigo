@@ -40,16 +40,18 @@
 
       <% @subscriptions.each do |subs| %>
       <div class="sub-content">
+
         <% if subs.avatar_url != "" %>
           <%= image_tag(subs.avatar_url, :class => "avatar") %>
         <% else %>
           <%= image_tag("no-prof-pic.jpg", :class => "avatar") %>
         <% end %>
+        <!-- This is doing something weird -->
         <p><%= subs.username %></p>
-        <%= form_for subs, method: :delete, class: "unsubscribe" do |f|%>
+        <%= form_for subs, url: remove_subscription_path, method: :post, class: "unsubscribe" do |f|%>
           <%= f.hidden_field :uid, value: subs.uid %>
           <%= f.hidden_field :provider, value: subs.provider %>
-        <p><%= f.submit "Unsubscribe" %></p>
+        <p><%= f.submit subs.unsubscribe_msg %></p>
         <% end %>
       </div>
 

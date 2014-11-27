@@ -7,6 +7,7 @@
           <div class="results-content">
             <p><%= link_to image_tag(result.profile_image_url.to_str, :class => "avatar"), "http://www.twitter.com/#{result.username}", :target => "_blank" %></p>
             <p><%= result.name %></p>
+            
             <%= form_for @subscription do |f| %>
             <%= f.hidden_field :provider, value: "twitter" %>
             <%= f.hidden_field :uid, value: result.id %>
@@ -14,13 +15,11 @@
             <%= f.hidden_field :avatar_url, value: result.profile_image_url.to_s %>
             <%= f.hidden_field :display_name, value: result.name %>
 
-              <% if !current_bro.subscriptions.where(provider: "twitter", uid: result.id.to_s).empty? %>
-                <%= f.submit "Nah, it's not right!", :class => "search_result btn btn-warning" %>
-              <% else %>
-                <%= f.submit "Begin a bromance", :class => "search_result" %>
-              <% end %>
+            <%= f.submit @subscription.unsubscribe_msg, :class => "unsearch_result #{ 'hide' if current_bro.subscriptions.where(provider: "twitter", uid: result.id.to_s).empty?}" %>
+
+            <%= f.submit @subscription.subscribe_msg, :class => "search_result #{ 'hide' if !current_bro.subscriptions.where(provider: "twitter", uid: result.id.to_s).empty?}" %>
+
             <% end %>
-          </p>
           </div>
         </div>
         <% end %>
