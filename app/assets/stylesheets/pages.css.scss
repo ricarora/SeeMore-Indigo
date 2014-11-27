@@ -120,16 +120,17 @@
 
 .login-button {
   margin-top: 10%;
+  width: 200px;
 }
 
 .login-button img {
-  width: 80px;
   height: auto;
+  width: 50px;
+  display: inline-block;
 }
 
 .loginlogo {
-  display: inline-block;
-  margin: 0 7%;
+  margin: 0 5px;
 }
 
 #flash-msg {
@@ -139,4 +140,32 @@
   left: 150px;
   color: #585859;
   float: right;
+}
+
+
+.thing {
+  background-color: green;
+}
+
+.avatar {
+  height: 75px;
+}
+
+.results {
+  display: inline-block;
+  margin: 15px;
+}
+
+.results-content {
+  padding: 10px;
+  width: 160px;
+  height: 170px;
+}
+
+.hide {
+  display: none;
+}
+
+.display {
+  display: inline-block;
 }

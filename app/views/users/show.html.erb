@@ -37,19 +37,24 @@
   <div class="col-md-10">
 
     <h2> Your Bromances </h2>
-
+      <!-- method and url here are overwritten by the ajax call and don't matter
+      except that they do need to hae-->
       <% @subscriptions.each do |subs| %>
-        <div class="sub-content">
-          <p><%= image_tag(subs[:pic]) %></p>
-          <p><%= subs[:username] %></p>
+      <div class="sub-content">
+    <% if subs.avatar_url != "" %>
+          <%= image_tag(subs.avatar_url, :class => "avatar") %>
+        <% else %>
+          <%= image_tag("no-prof-pic.jpg", :class => "avatar") %>
+        <% end %>
+        <!-- This is doing something weird -->
+        <p><%= subs.username %></p>
+        <%= form_for subs, url: remove_subscription_path, method: :post do |f|%>
+          <%= f.hidden_field :uid, value: subs.uid %>
+          <%= f.hidden_field :provider, value: subs.provider %>
+        <p><%= f.submit subs.unsubscribe_msg %></p>
+        <% end %>
+      </div>
 
-          <%= form_tag('/subscriptions', method: :delete) do %>
-            <%= hidden_field_tag :uid, subs[:uid] %>
-            <%= hidden_field_tag :provider, subs[:provider] %>
-            <%= submit_tag "Unsubscribe" %>
-          <% end %>
-
-        </div>
       <% end %>
 
   </div> <!-- close col-md-10 -->

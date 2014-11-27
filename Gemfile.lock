@@ -102,6 +102,9 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
+    omniauth-github (1.1.2)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
     omniauth-instagram (1.0.1)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
@@ -220,10 +223,12 @@ DEPENDENCIES
   binding_of_caller
   coffee-rails (~> 4.0.0)
   dotenv-rails
+  httparty
   instagram
   jbuilder (~> 2.0)
   jquery-rails
   omniauth
+  omniauth-github
   omniauth-instagram
   omniauth-twitter
   pg

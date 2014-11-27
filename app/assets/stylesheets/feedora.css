@@ -2,10 +2,6 @@
   text-align: center;
 }
 
-/*.col-md-1 {
-  border-left: gray solid 4px;
-}*/
-
 .col-md-2, .col-md-3, .col-md-7 {
   margin-bottom: 20px;
   margin-top: 20px;
@@ -19,10 +15,6 @@
 .feed li {
   list-style-type: none;
 }
-
-/*.feed {
-  position:
-}*/
 
 .feedora {
   text-align: center;
@@ -44,8 +36,4 @@ h1.feedora {
 
 .feed-item {
   border-bottom: #D3D3D3 solid 2px;
-}
-
-.avatar {
-  height: 60px;
 }

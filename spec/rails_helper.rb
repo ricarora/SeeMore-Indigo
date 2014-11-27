@@ -18,6 +18,11 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 OmniAuth.config.test_mode = true
 
+OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+      :provider => 'twitter',
+      :uid => '123545'
+      # etc.
+    })
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
