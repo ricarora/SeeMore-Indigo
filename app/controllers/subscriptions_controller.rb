@@ -9,6 +9,10 @@ class SubscriptionsController < ApplicationController
 
   end
 
+  def bad
+    #this method is never used, but the route is needed
+    #when rails makes a form_for it needs to 
+  end
   #this destroys the connection between a subscription and a user, but not the actual subscription
   def destroy
     sub_params = params[:subscription]
