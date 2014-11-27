@@ -1,6 +1,6 @@
 require 'rails_helper'
 describe PagesController, :type => :controller do
-  before {User.create(name: "meow", email: "cat@meow.com")}
+  # before {User.create(name: "meow", email: "cat@meow.com")}
   describe "#index" do
     context "user is logged out" do
       before { session[:bro_id] = nil }
@@ -34,12 +34,12 @@ describe PagesController, :type => :controller do
   end
   describe  "#user_search" do
     context "user is logged in" do
-      xit "renders twitter search results when twitter is searched" do
+      it "populates a results array when twitter is searched" do
         user = User.create
         session[:bro_id] = user.id
-        get :user_search, {}, {provider: "twitter", search: "something"}
-        puts "******" + response.inspect
-        expect(response).to render_template(:twitter_results)
+
+        get :user_search, {provider: "Twitter", search: "bookis"}
+        expect(assigns(:results)).to_not be_nil
       end
     end
   end
