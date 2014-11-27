@@ -10,12 +10,9 @@ Rails.application.routes.draw do
   get "/users/:id",                to: "users#show",        as: :show
   patch "/users/:id",              to: "users#update"
 
-  #
-  # get "/subscriptions",         to: "subscriptions#destroy"
-  post "/subscriptions",        to: "subscriptions#create", as: :subscriptions
-  # delete "/subscriptions",      to: "subscriptions#destroy"
-
+  # post "/add_subscription",    to: "subscriptions#create", as: :add_subscription
   post "/remove_subscription",    to: "subscriptions#destroy", as: :remove_subscription
+  post "/subscriptions",         to: "subscriptions#create",    as: :subscriptions
 
 
   get "/search", to: "pages#user_search", as: :user_search

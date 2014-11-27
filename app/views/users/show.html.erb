@@ -37,12 +37,13 @@
   <div class="col-md-10">
 
     <h2> Your Bromances </h2>
-
+      <!-- method and url here are overwritten by the ajax call and don't matter
+      except that they do need to hae-->
       <% @subscriptions.each do |subs| %>
       <div class="sub-content">
         <%= image_tag(subs.avatar_url) %>
         <%= subs.username %>
-        <%= form_for subs, url: remove_subscription_path, method: :post, class: "unsubscribe" do |f|%>
+        <%= form_for subs, url: remove_subscription_path, method: :post do |f| %>
           <%= f.hidden_field :uid, value: subs.uid %>
           <%= f.hidden_field :provider, value: subs.provider %>
         <%= f.submit subs.unsubscribe_msg %>

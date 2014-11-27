@@ -23,10 +23,12 @@ $(function() {
     }
   });
 
-  $(".edit-subscription").submit(function(e) {
+  $(".edit_subscription").submit(function(e) {
     e.preventDefault();
     var $form = $(this);
-    $.ajax($form.attr("action"), {
+    $.ajax({
+      url: "/remove_subscription",
+      type: "POST",
       data: $form.serialize(),
       success: function() {
         $form.parent().hide();
