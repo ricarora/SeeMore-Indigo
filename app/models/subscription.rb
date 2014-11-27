@@ -10,6 +10,7 @@ class Subscription < ActiveRecord::Base
 
   def subscribe_msg
     msgs = ["Start a Bromance", "Come at me bro", "Bronnect"]
+    msgs.sample
   end
 
 end
