@@ -19,11 +19,11 @@
       <%= f.hidden_field :display_name, value: user.name %>
 
 
-      <%= f.submit "Unsubscribe", :class => "unsearch_result #{ 'hide' if current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty?}" %>
+      <%= f.submit @subscription.unsubscribe_msg, :class => "unsearch_result #{ 'hide' if current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty?}" %>
 
-      <%= f.submit "Begin a bromance", :class => "search_result #{ 'hide' if !current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty?}" %>
+      <%= f.submit @subscription.subscribe_msg, :class => "search_result #{ 'hide' if !current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty?}" %>
 
-    
+
     <% end %> <!-- end form_for loop -->
     <hr>
   <% end %> <!-- end each loop -->
