@@ -1,6 +1,6 @@
 require 'rails_helper'
 describe PagesController, :type => :controller do
-  before {User.create(name: "meow", email: "cat@meow.com")}
+  # before {User.create(name: "meow", email: "cat@meow.com")}
   describe "#index" do
     context "user is logged out" do
       before { session[:bro_id] = nil }
@@ -10,22 +10,37 @@ describe PagesController, :type => :controller do
       end
     end
     context "user is logged in" do
-      before { session[:bro_id] = 1 }
-      # This test is failing, still need more research, feel free to work on this.
-      # This is more approachable than the test on sessions_controller_spec.
-      xit "it is successful" do
-        get :index, {}, {:bro_id => 1}
-        # puts session.inspect
-        expect(response).to render_template("index")
+      it "it is successful" do
+        user = User.create
+        session[:bro_id] = user.id
+        get :index
+        expect(response.status).to eq 200
       end
       it "there is a user" do
         get :index
         expect(User.count).to eq 1
       end
-      # it "there is a  current user named 'meow'" do
-      #   get :index
-      #   expect(current_bro.name).to eq "meow"
-      # end
+      it "loads the user's feed" do
+        user = User.create
+        subscription = Subscription.create
+        subscription.feed_items.create
+        user.subscriptions << subscription
+        session[:bro_id] = user.id
+
+        get :index
+        expect(assigns(:feed)).to_not be_nil
+      end
+    end
+  end
+  describe  "#user_search" do
+    context "user is logged in" do
+      it "populates a results array when twitter is searched" do
+        user = User.create
+        session[:bro_id] = user.id
+
+        get :user_search, {provider: "Twitter", search: "bookis"}
+        expect(assigns(:results)).to_not be_nil
+      end
     end
   end
 end
