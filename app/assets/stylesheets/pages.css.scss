@@ -147,6 +147,21 @@
   background-color: green;
 }
 
+.avatar {
+  height: 75px;
+}
+
+.results {
+  display: inline-block;
+  margin: 15px;
+}
+
+.results-content {
+  padding: 10px;
+  width: 160px;
+  height: 170px;
+}
+
 .hide {
   display: none;
 }
