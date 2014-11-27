@@ -1,32 +1,36 @@
 <h1>Vimeo Results</h1>
+<div class="row">
+  <div class="col-md-11">
+  <% if @results %>
 
-<% if @results %>
+    <% @results.each do |user| %> <!-- Beemo returns an array of hashes of Vimeo users -->
+    <div class="results">
+      <div class="results-content">
+      <% if user.profile_pics %>
+        <p><%= link_to image_tag(user.profile_pics["sizes"][1]["link"], :class => "avatar"), user.url, :target => "_blank" %></p>
+      <% else %>
+       <%= link_to image_tag('no-prof-pic.jpg', :class => "avatar"), user.url, :target => "_blank" %>
+       <% end %>
+      <p>Name: <%= user.name %></p>
 
-  <% @results.each do |user| %> <!-- Beemo returns an array of hashes of Vimeo users -->
+      <%= form_for @subscription do |f| %>
+        <%= f.hidden_field :provider, value: "vimeo" %>
+        <%= f.hidden_field :uid, value: user.uid.to_s %>
+        <%= f.hidden_field :username, value: user.url.gsub("https://vimeo.com/", "") %>
+        <%= f.hidden_field :avatar_url, value: user.profile_pics ? user.profile_pics["sizes"][1]["link"] : nil  %>
+        <%= f.hidden_field :display_name, value: user.name %>
 
-    <% if user.profile_pics %>
-      <p><%= link_to image_tag(user.profile_pics["sizes"][1]["link"]), user.url %></p> <!-- some users don't have prof pic -->
-    <% else %>
-     <%= link_to "<div class='no_prof_pic'></div>".html_safe, user.url %> <!-- without html_safe, won't render html -->
-     <% end %>
-    <p>Name: <%= user.name %></p>
+        <%= f.submit @subscription.unsubscribe_msg, :class => "unsearch_result #{ 'hide' if current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty?}" %>
 
-    <%= form_for @subscription do |f| %>
-      <%= f.hidden_field :provider, value: "vimeo" %>
-      <%= f.hidden_field :uid, value: user.uid.to_s %>
-      <%= f.hidden_field :username, value: user.url.gsub("https://vimeo.com/", "") %>
-      <%= f.hidden_field :avatar_url, value: user.profile_pics ? user.profile_pics["sizes"][1]["link"] : nil  %>
-      <%= f.hidden_field :display_name, value: user.name %>
+        <%= f.submit @subscription.subscribe_msg, :class => "search_result #{ 'hide' if !current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty?}" %>
 
+      <% end %> <!-- end form_for loop -->
+      </div>
+    </div>
+    <% end %> <!-- end each loop -->
 
-      <%= f.submit @subscription.unsubscribe_msg, :class => "unsearch_result #{ 'hide' if current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty?}" %>
-
-      <%= f.submit @subscription.subscribe_msg, :class => "search_result #{ 'hide' if !current_bro.subscriptions.where(provider: "vimeo", uid: user.uid.to_s).empty?}" %>
-
-
-    <% end %> <!-- end form_for loop -->
-    <hr>
-  <% end %> <!-- end each loop -->
-<% else %>
-  <p>No results</p>
-<% end %>
+  <% else %>
+    <p>No results</p>
+  <% end %>
+  </div>
+</div>
