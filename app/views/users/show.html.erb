@@ -51,7 +51,7 @@
         <%= form_for subs, url: remove_subscription_path, method: :post do |f|%>
           <%= f.hidden_field :uid, value: subs.uid %>
           <%= f.hidden_field :provider, value: subs.provider %>
-        <p><%= f.submit subs.unsubscribe_msg %></p>
+        <p><%= f.submit subs.unsubscribe_msg, :class => "btn-danger" %></p>
         <% end %>
       </div>
 
