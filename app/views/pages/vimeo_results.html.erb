@@ -11,7 +11,7 @@
       <% else %>
        <%= link_to image_tag('no-prof-pic.jpg', :class => "avatar"), user.url, :target => "_blank" %>
        <% end %>
-      <p>Name: <%= user.name %></p>
+      <p><%= user.name %></p>
 
       <%= form_for @subscription do |f| %>
         <%= f.hidden_field :provider, value: "vimeo" %>
