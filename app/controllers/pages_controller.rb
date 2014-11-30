@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 
   def user_search
     @subscription = Subscription.new
-    srch = params[:search]
+    srch = params[:search].gsub(" ", "_")
     request.env["HTTP_REFERER"]
     if srch && srch.length > 0
       case params[:provider]
