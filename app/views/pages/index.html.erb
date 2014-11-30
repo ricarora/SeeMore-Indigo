@@ -27,10 +27,10 @@
               <p><%= item.content %></p>
             <% elsif item.subscription.provider == "vimeo" %>
               <iframe src="http://player.vimeo.com/video/<%= item.content %>" width="500" height="281"    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-              <p><%= item.caption %></p>
+              <p class="caption"><%= item.caption %></p>
             <% elsif item.subscription.provider == "instagram" %>
               <%= image_tag(item.content) %>
-              <p><%= item.caption %></p>
+              <p class="caption"><%= item.caption %></p>
           </div> <!-- end of col-md-6 class div -->
 
             <% end %> <!-- end of if twitter/vimeo/instagram conditional -->
