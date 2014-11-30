@@ -4,7 +4,7 @@ class Subscription < ActiveRecord::Base
 
   def unsubscribe_msg
     msgs = ["Break it off", "End it", "Make a clean break", "Go no contact",
-       "Slow fade", "Hit the gym", "It's you, not me", "Get out of my face, bro"]
+       "Slow fade", "Hit the gym", "It's not me, it's you", "Get out of my face"]
     msgs.sample
   end
 
