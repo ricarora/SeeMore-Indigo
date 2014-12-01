@@ -75,6 +75,14 @@ describe PagesController, :type => :controller do
         expect(assigns(:results).collect {|vimeo_user| vimeo_user.url.gsub("https://vimeo.com/", "")}).to include("teamtreehouse")
       end
 
+      it 'renders the instagra, search results when instagram is searched' do
+        user = User.create
+        session[:bro_id] = user.id
+
+        get :user_search, {provider: "Instagram", search: "bookis"}
+        expect(response).to render_template("instagram_results")
+      end
+
       it 'has cats_of_instagram in the result when instagram is searched for "cats"' do
         user = User.create
         session[:bro_id] = user.id
