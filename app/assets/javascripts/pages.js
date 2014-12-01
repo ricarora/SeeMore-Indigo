@@ -41,26 +41,26 @@ $(function() {
 
 
 //  This will subscribe the result on a search page
-  $(".search_result").click(function(e) {
-    e.preventDefault();
-    var current = $(this);
-    var current_hidden = $(current).siblings(".unsearch_result");
-    // var value = $(this).siblings("div").children()[1];
-    var $form = $(this).parents("form");
-    $.ajax({
-      url: "/subscriptions",
-      type: "POST",
-      data: $form.serialize(),
-      // dataType: "script",
-      success: function() {
-        $(current_hidden).removeClass("hide");
-        $(current).addClass("hide");
-      },
-      error: function(err) {
-        alert("Error!!");
-      },
-    });
-  });
+  // $(".search_result").click(function(e) {
+  //   e.preventDefault();
+  //   var current = $(this);
+  //   var current_hidden = $(current).siblings(".unsearch_result");
+  //   // var value = $(this).siblings("div").children()[1];
+  //   var $form = $(this).parents("form");
+  //   $.ajax({
+  //     url: "/subscriptions",
+  //     type: "POST",
+  //     data: $form.serialize(),
+  //     // dataType: "script",
+  //     success: function() {
+  //       $(current_hidden).removeClass("hide");
+  //       $(current).addClass("hide");
+  //     },
+  //     error: function(err) {
+  //       alert("Error!!");
+  //     },
+  //   });
+  // });
 
 
 //  This will unsubscribe the result on a search page
