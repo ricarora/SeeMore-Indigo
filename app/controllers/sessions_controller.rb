@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         current_bro.authentications.create(provider: auth_hash[:provider], uid: auth_hash[:uid])
         redirect_to show_path(current_bro.id), notice: "Authentication added"
       else
-        redirect_to show_path(current_bro.id), warning: "That account is already associated with another user"
+        redirect_to show_path(current_bro.id), notice: "Account already in use!"
       end
     else
       if login.empty?
