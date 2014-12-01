@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 
   def show
     @subscriptions = current_bro.subscriptions
+    @added_providers = current_bro.providers
+    @providers = ["twitter", "instagram", "github"]
   end
 
   def update
