@@ -1,21 +1,19 @@
 // # Place all the behaviors and hooks related to the matching controller here.
 // # All this logic will automatically be available in application.js.
 // # You can use CoffeeScript in this file: http://coffeescript.org/
-function toggle_visibility(id) {
-  var e = document.getElementById(id);
-  if(e.style.display == 'block') {
-    e.style.display = 'none';
-  } else {
-    e.style.display = 'block';
-  }
-  document.getElementById("hide_profile").style.display="none";
-}
-
 
 // Ajax for subscribe & unsubscribe
 
 $(function() {
 
+  // this function shows the edit deets form on show page
+  $("#display_profile").click(function(e) {
+    e.preventDefault();
+    $(this).hide();
+    $('#edit_profile').show();
+  });
+
+  // this function prevents users from searching an empty string
   var searchForm = $(".search-header").children("form");
   searchForm.submit(function(e) {
     if ($("#search").val() === "") {
@@ -23,6 +21,8 @@ $(function() {
     }
   });
 
+
+  //this function is for unsubscribing on the show page
   $(".edit_subscription").submit(function(e) {
     e.preventDefault();
     var $form = $(this);
