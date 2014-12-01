@@ -35,6 +35,16 @@ describe PagesController, :type => :controller do
       end
     end
   end
+
+  describe "#watup" do
+    context "user is logged out" do
+      before { session[:bro_id] = nil }
+      it 'renders the landing page' do
+        get :landing
+        expect(response).to render_template("landing")
+      end
+    end
+  end
   describe  "#user_search" do
     context "user is logged in" do
       it 'renders the correct page when any provider is searched' do
@@ -67,7 +77,7 @@ describe PagesController, :type => :controller do
       it 'has teamtreehouse in the result when vimeo is searched for treehouse' do
         user = User.create
         session[:bro_id] = user.id
-        get :user_search, {provider: "Vimeo", search: "treehouse"}
+        get :user_search, {provider: "Vimeo", search: "teamtreehouse"}
         expect(assigns(:results).collect {|vimeo_user| vimeo_user.url.gsub("https://vimeo.com/", "")}).to include("teamtreehouse")
       end
 
