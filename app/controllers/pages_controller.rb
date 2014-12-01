@@ -57,7 +57,7 @@ class PagesController < ApplicationController
     tweets = $client.user_timeline(subscription.uid.to_i)
     tweets.each do |tweet|
       unless subscription.feed_items.find_by_post_id(tweet.id.to_s)
-        subscription.feed_items << feed_item_maker(tweet.full_text, tweet.created_at, tweet.id)
+        subscription.feed_items << feed_item_maker(tweet.full_text, tweet.created_at, tweet.id, nil)
       end
     end
   end
@@ -73,7 +73,8 @@ class PagesController < ApplicationController
       unless subscription.feed_items.find_by_post_id(video["id"].to_s)
         subscription.feed_items << feed_item_maker(video["url"].gsub("https://vimeo.com/", ""),
         video["upload_date"],
-        video["id"])
+        video["id"],
+        video["description"])
       end
     end
   end
@@ -88,9 +89,10 @@ class PagesController < ApplicationController
     )
     instamedia.each do |instagram|
       unless subscription.feed_items.find_by_post_id(instagram[:id].to_s)
-        subscription.feed_items<< feed_item_maker(instagram["images"]["low_resolution"]["url"],
+        subscription.feed_items << feed_item_maker(instagram["images"]["low_resolution"]["url"],
         DateTime.strptime(instagram["created_time"],'%s'),
-        instagram[:id].to_s )
+        instagram[:id].to_s,
+        instagram["caption"]["text"], )
       end
     end
   end
