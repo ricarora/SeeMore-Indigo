@@ -3,13 +3,15 @@ class SubscriptionsController < ApplicationController
   def create
     subs_hash = params[:subscription]
     if subs_hash[:provider] == "instagram" && insta_user_is_private?(subs_hash[:uid])
-      redirect_to root_path, notice: "Account is private"
+      respond_to do |format|
+        format.js { redirect_to root_path, notice: "Account is private" }
+      end
     else
       find_or_create(subs_hash)
-      respond_to do |format|
-        format.html {render html: "success"}
-        format.js
-      end
+    end
+    respond_to do |format|
+      format.html {render html: "success"}
+      format.js
     end
   end
 
