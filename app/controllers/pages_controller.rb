@@ -30,8 +30,8 @@ class PagesController < ApplicationController
     render "#{provider}_results".downcase.to_s
   end
 
-  def feed_item_maker(content, post_time, post_id)
-    FeedItem.create(content: content, post_time: post_time, post_id: post_id)
+  def feed_item_maker(content, post_time, post_id, caption)
+    FeedItem.create(content: content, post_time: post_time, post_id: post_id, caption: caption)
   end
 
   def load_feed
