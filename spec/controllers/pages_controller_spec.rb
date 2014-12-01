@@ -44,6 +44,17 @@ describe PagesController, :type => :controller do
         expect(response).to render_template("landing")
       end
     end
+
+    context "user is logged in" do
+      it 'a logged in user cannot view the landing page' do
+        user = User.create
+        session[:bro_id] = user.id
+        
+        get :landing
+        expect(response).to redirect_to("/")
+      end
+    end
+
   end
 
   describe  "#user_search" do
