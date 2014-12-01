@@ -37,6 +37,13 @@ describe PagesController, :type => :controller do
   end
   describe  "#user_search" do
     context "user is logged in" do
+      it 'renders the twitter search results when twitter is searched' do
+        user = User.create
+        session[:bro_id] = user.id
+
+        get :user_search, {provider: "Twitter", search: "bookis"}
+        expect(response).to render_template("twitter_results")
+      end
       it "populates a results array when twitter is searched" do
         user = User.create
         session[:bro_id] = user.id
