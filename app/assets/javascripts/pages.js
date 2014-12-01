@@ -57,7 +57,10 @@ $(function() {
         $(current).addClass("hide");
       },
       error: function(err) {
-        $(".container").prepend("Account is private.");
+        if ($form.children(".error-private").length === 0 ) {
+          var $error = $("<div class=error-private> Account is private </div>");
+          $form.prepend($error);
+        }
       },
     });
   });
