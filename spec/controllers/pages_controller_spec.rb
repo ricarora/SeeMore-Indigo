@@ -36,7 +36,7 @@ describe PagesController, :type => :controller do
     end
   end
 
-  describe "#watup" do
+  describe "#landing" do
     context "user is logged out" do
       before { session[:bro_id] = nil }
       it 'renders the landing page' do
@@ -45,6 +45,7 @@ describe PagesController, :type => :controller do
       end
     end
   end
+
   describe  "#user_search" do
     context "user is logged in" do
       it 'renders the correct page when any provider is searched' do
