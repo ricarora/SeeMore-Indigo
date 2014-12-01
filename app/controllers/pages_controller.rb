@@ -52,7 +52,7 @@ class PagesController < ApplicationController
     user = $client.user(subscription.uid.to_i)
     subscription.update(avatar_url: user.profile_image_url.to_s,
     username: user.screen_name,
-    display_name: user.name
+    display_name: user.name 
     )
     tweets = $client.user_timeline(subscription.uid.to_i)
     tweets.each do |tweet|

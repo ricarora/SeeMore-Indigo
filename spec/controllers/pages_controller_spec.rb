@@ -44,13 +44,15 @@ describe PagesController, :type => :controller do
         get :user_search, {provider: "Twitter", search: "bookis"}
         expect(assigns(:results)).to_not be_nil
       end
+
       it 'has bookis in the result when twitter is searched for "bookis"' do
         user = User.create
         session[:bro_id] = user.id
         get :user_search, {provider: "Twitter", search: "bookis"}
-        puts "*"*80
-        puts response.body.inspect
+        expect(assigns(:results).collect {|twitter_user| twitter_user.username}).to include("bookis")
       end
+
+      
     end
 
   end
