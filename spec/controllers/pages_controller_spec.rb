@@ -44,6 +44,7 @@ describe PagesController, :type => :controller do
         get :user_search, {provider: "Twitter", search: "bookis"}
         expect(response).to render_template("twitter_results")
       end
+
       it "populates a results array when twitter is searched" do
         user = User.create
         session[:bro_id] = user.id
@@ -57,6 +58,14 @@ describe PagesController, :type => :controller do
         session[:bro_id] = user.id
         get :user_search, {provider: "Twitter", search: "bookis"}
         expect(assigns(:results).collect {|twitter_user| twitter_user.screen_name}).to include("bookis")
+      end
+
+      it 'renders the vimeo search results when vimeo is searched' do
+        user = User.create
+        session[:bro_id] = user.id
+
+        get :user_search, {provider: "Vimeo", search: "bookis"}
+        expect(response).to render_template("vimeo_results")
       end
 
       it 'has teamtreehouse in the result when vimeo is searched for treehouse' do
