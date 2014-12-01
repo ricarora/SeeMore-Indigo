@@ -37,12 +37,16 @@ describe PagesController, :type => :controller do
   end
   describe  "#user_search" do
     context "user is logged in" do
-      it 'renders the twitter search results when twitter is searched' do
+      it 'renders the correct page when any provider is searched' do
         user = User.create
         session[:bro_id] = user.id
 
-        get :user_search, {provider: "Twitter", search: "bookis"}
-        expect(response).to render_template("twitter_results")
+        providers = ["Twitter", "Vimeo", "Instagram"]
+
+        providers.each do |provider|
+          get :user_search, {provider: provider, search: "bookis"}
+          expect(response).to render_template("#{provider.downcase}_results")
+        end
       end
 
       it "populates a results array when twitter is searched" do
@@ -60,27 +64,11 @@ describe PagesController, :type => :controller do
         expect(assigns(:results).collect {|twitter_user| twitter_user.screen_name}).to include("bookis")
       end
 
-      it 'renders the vimeo search results when vimeo is searched' do
-        user = User.create
-        session[:bro_id] = user.id
-
-        get :user_search, {provider: "Vimeo", search: "bookis"}
-        expect(response).to render_template("vimeo_results")
-      end
-
       it 'has teamtreehouse in the result when vimeo is searched for treehouse' do
         user = User.create
         session[:bro_id] = user.id
         get :user_search, {provider: "Vimeo", search: "treehouse"}
         expect(assigns(:results).collect {|vimeo_user| vimeo_user.url.gsub("https://vimeo.com/", "")}).to include("teamtreehouse")
-      end
-
-      it 'renders the instagra, search results when instagram is searched' do
-        user = User.create
-        session[:bro_id] = user.id
-
-        get :user_search, {provider: "Instagram", search: "bookis"}
-        expect(response).to render_template("instagram_results")
       end
 
       it 'has cats_of_instagram in the result when instagram is searched for "cats"' do
