@@ -18,7 +18,7 @@ describe PagesController, :type => :controller do
       end
 
       #what is this test for? it only passes because of a test in the sessions_controller_spec
-      it "there is a user" do
+      xit "there is a user" do
         get :index
         expect(User.count).to eq 1
       end
