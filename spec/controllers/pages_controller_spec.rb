@@ -16,10 +16,13 @@ describe PagesController, :type => :controller do
         get :index
         expect(response.status).to eq 200
       end
-      it "there is a user" do
+
+      #what is this test for? it only passes because of a test in the sessions_controller_spec
+      xit "there is a user" do
         get :index
         expect(User.count).to eq 1
       end
+
       it "loads the user's feed" do
         user = User.create
         subscription = Subscription.create
@@ -41,6 +44,14 @@ describe PagesController, :type => :controller do
         get :user_search, {provider: "Twitter", search: "bookis"}
         expect(assigns(:results)).to_not be_nil
       end
+      it 'has bookis in the result when twitter is searched for "bookis"' do
+        user = User.create
+        session[:bro_id] = user.id
+        get :user_search, {provider: "Twitter", search: "bookis"}
+        puts "*"*80
+        puts response.body.inspect
+      end
     end
+
   end
 end

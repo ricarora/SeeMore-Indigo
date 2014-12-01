@@ -11,21 +11,11 @@ class PagesController < ApplicationController
 
   def user_search
     @subscription = Subscription.new
-    srch = params[:search].gsub(" ", "_")
-    request.env["HTTP_REFERER"]
+    srch = params[:search]
+    # request.env["HTTP_REFERER"]
+    provider = params[:provider]
     if srch && srch.length > 0
-      case params[:provider]
-      when "Twitter"
-        @results = $client.user_search(srch).first(10)
-        render :twitter_results
-      when "Vimeo"
-        @results = Beemo::User.search(srch)
-        render :vimeo_results
-      when "Instagram"
-        insta_client = Instagram.client(:access_token => session[:access_token])
-        @results = insta_client.user_search(srch)
-        render :instagram_results
-      end
+      search_for(srch, provider)
     else
       # if you use redirect_to :back, it crashes when you search for an empty
       # string on a search results page
@@ -34,6 +24,11 @@ class PagesController < ApplicationController
   end
 
   private
+
+  def search_for(srch, provider)
+    @results = ProviderSearch.search_for(srch, provider)
+    render "#{provider}_results".downcase.to_s
+  end
 
   def feed_item_maker(content, post_time, post_id, caption)
     FeedItem.create(content: content, post_time: post_time, post_id: post_id, caption: caption)
