@@ -28,7 +28,17 @@
   <div class="col-md-4">
     <h2>Get the hook up</h2>
 
-    Twitter, <%= link_to "Instagram", "/auth/instagram" %>, Github, Vimeo
+    <% @providers.each do |provider| %>
+        <% if @added_providers.include? provider %>
+          <div class = "has-auth">
+            <%= image_tag("#{provider}-64-black.png") %>
+          </div>
+        <% else %>
+          <div class = "add-auth">
+            <%= link_to image_tag("#{provider}.png"), "/auth/#{provider}" %>
+          </div>
+        <% end %>
+    <% end %>
   </div>
 
 </div> <!-- close row div -->
