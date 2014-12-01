@@ -21,8 +21,8 @@ class ProviderSearch
   end
 
   def self.get_instagram_results(srch)
-    insta_client = Instagram.client(:access_token => session[:access_token])
-    @results = insta_client.user_search(srch)
+    # insta_client = Instagram.client(:access_token => session[:access_token])
+    @results = Instagram.client.user_search(srch)
   end
 
 end
