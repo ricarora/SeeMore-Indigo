@@ -49,10 +49,15 @@ describe PagesController, :type => :controller do
         user = User.create
         session[:bro_id] = user.id
         get :user_search, {provider: "Twitter", search: "bookis"}
-        expect(assigns(:results).collect {|twitter_user| twitter_user.username}).to include("bookis")
+        expect(assigns(:results).collect {|twitter_user| twitter_user.screen_name}).to include("bookis")
       end
 
-      
+      it 'has teamtreehouse in the result when vimeo is searched for treehouse' do
+        user = User.create
+        session[:bro_id] = user.id
+        get :user_search, {provider: "Vimeo", search: "treehouse"}
+        expect(assigns(:results).collect {|vimeo_user| vimeo_user.url.gsub("https://vimeo.com/", "")}).to include("teamtreehouse")
+      end
     end
 
   end
