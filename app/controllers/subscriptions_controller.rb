@@ -6,6 +6,8 @@ class SubscriptionsController < ApplicationController
       respond_to do |format|
         format.js { redirect_to root_path, notice: "Account is private" }
       end
+    elsif subs_hash[:provider] == "twitter" && subs_hash[:protected] == true
+      raise
     else
       find_or_create(subs_hash)
     end
