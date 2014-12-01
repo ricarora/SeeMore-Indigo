@@ -27,7 +27,7 @@
               <p><%= item.content %></p>
             <% elsif item.subscription.provider == "vimeo" %>
               <iframe src="http://player.vimeo.com/video/<%= item.content %>" width="500" height="281"    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-              <p class="caption"><%= item.caption %></p>
+              <p class="caption"><%= item.caption.html_safe %></p>
             <% elsif item.subscription.provider == "instagram" %>
               <%= image_tag(item.content) %>
               <p class="caption"><%= item.caption %></p>
