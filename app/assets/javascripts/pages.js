@@ -40,7 +40,7 @@ $(function() {
   });
 
 
-//  This will subscribe the result on a search page
+ // This will subscribe the result on a search page
   $(".search_result").click(function(e) {
     e.preventDefault();
     var current = $(this);
@@ -57,7 +57,10 @@ $(function() {
         $(current).addClass("hide");
       },
       error: function(err) {
-        alert("Error!!");
+        if ($form.children(".error-private").length === 0 ) {
+          var $error = $("<div class=error-private> Account is private </div>");
+          $form.prepend($error);
+        }
       },
     });
   });
