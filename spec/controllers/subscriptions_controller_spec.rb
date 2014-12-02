@@ -9,6 +9,7 @@ describe SubscriptionsController, :type => :controller do
       user.subscriptions << Subscription.create(uid: "1621062337", provider: "twitter")
       get :destroy, {subscription: {provider: "twitter", uid: "1621062337"} }
       expect(user.subscriptions.count).to eq(0)
+      # why does this test pass, but (user.subscriptions).to_be empty doesn't???
     end
   end
 
