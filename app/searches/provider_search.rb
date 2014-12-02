@@ -14,6 +14,7 @@ class ProviderSearch
 
   def self.get_twitter_results(srch)
     @results = $client.user_search(srch).first(10)
+  #  @results.reject! { |result| result.protected? == true }
   end
 
   def self.get_vimeo_results(srch)

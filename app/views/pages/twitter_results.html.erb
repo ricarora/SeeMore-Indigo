@@ -3,27 +3,28 @@
   <div class="col-md-11">
       <% if @results %>
         <% @results.each do |result| %>
-        <div class="results">
-          <div class="results-content">
-            <p><%= link_to image_tag(result.profile_image_url.to_str, :class => "avatar"), "http://www.twitter.com/#{result.username}", :target => "_blank" %></p>
-            <p><%= result.name %></p>
+          <% if result.protected? == false %>
+            <div class="results">
+              <div class="results-content">
+                <p><%= link_to image_tag(result.profile_image_url.to_str, :class => "avatar"), "http://www.twitter.com/#{result.username}", :target => "_blank" %></p>
+                <p><%= result.name %></p>
 
-            <%= form_for @subscription do |f| %>
-            <%= f.hidden_field :provider, value: "twitter" %>
-            <%= f.hidden_field :uid, value: result.id %>
-            <%= f.hidden_field :username, value: result.username %>
-            <%= f.hidden_field :avatar_url, value: result.profile_image_url.to_s %>
-            <%= f.hidden_field :display_name, value: result.name %>
-            <%= f.hidden_field :protected, value: result.protected? %>
+                <%= form_for @subscription do |f| %>
+                  <%= f.hidden_field :provider, value: "twitter" %>
+                  <%= f.hidden_field :uid, value: result.id %>
+                  <%= f.hidden_field :username, value: result.username %>
+                  <%= f.hidden_field :avatar_url, value: result.profile_image_url.to_s %>
+                  <%= f.hidden_field :display_name, value: result.name %>
+                  <%= f.hidden_field :protected, value: result.protected? %>
 
-            <%= f.submit @subscription.unsubscribe_msg, :class => "unsearch_result btn-danger #{ 'hide' if current_bro.subscriptions.where(provider: "twitter", uid: result.id.to_s).empty?}" %>
+                  <%= f.submit @subscription.unsubscribe_msg, :class => "unsearch_result btn-danger #{ 'hide' if current_bro.subscriptions.where(provider: "twitter", uid: result.id.to_s).empty?}" %>
 
-            <%= f.submit @subscription.subscribe_msg, :class => "search_result btn-success #{ 'hide' if !current_bro.subscriptions.where(provider: "twitter", uid: result.id.to_s).empty?}" %>
-
-            <% end %>
-          </div>
-        </div>
-        <% end %>
-      <% end %>
+                  <%= f.submit @subscription.subscribe_msg, :class => "search_result btn-success #{ 'hide' if !current_bro.subscriptions.where(provider: "twitter", uid: result.id.to_s).empty?}" %>
+                <% end %> <!-- close form_from subscrip -->
+              </div>
+            </div>
+          <% end %> <!-- close if protected? clause -->
+        <% end %> <!-- close @results loop -->
+      <% end %> <!-- end if @results clause -->
   </div>
 </div>
