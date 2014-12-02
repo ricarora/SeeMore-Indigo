@@ -30,6 +30,7 @@ class SubscriptionsController < ApplicationController
       puts "BROSUBS1: #{current_bro.subscriptions.inspect}"
       current_bro.subscriptions.destroy(subs.id)
       puts "BROSUBS2: #{current_bro.subscriptions.inspect}"
+      puts "((((((((((#{current_bro.subscriptions.count}"
       puts "INSIDE IF CHECK$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     end
     respond_to do |format|

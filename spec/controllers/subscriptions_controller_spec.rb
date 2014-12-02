@@ -8,7 +8,7 @@ describe SubscriptionsController, :type => :controller do
       user = User.find(session[:bro_id])
       user.subscriptions << Subscription.create(uid: "1621062337", provider: "twitter")
       get :destroy, {subscription: {provider: "twitter", uid: "1621062337"} }
-      expect(user.subscriptions).to be_empty
+      expect(user.subscriptions.count).to eq(0)
     end
   end
 
