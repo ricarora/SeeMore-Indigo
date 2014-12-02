@@ -58,6 +58,8 @@
 
 .container {
   padding: 150px;
+  text-align: center;
+  margin: 100 0;
 }
 
 .landing {
@@ -139,7 +141,7 @@
   position: absolute;
   top: 20px;
   left: 150px;
-  color: #585859;
+      color: #e13509;
   float: right;
 }
 .avatar {
@@ -148,10 +150,11 @@
 
 .results {
   display: inline-block;
-  margin: 15px;
+  text-align: center;
 }
 
 .results-content {
+  margin: 15px;
   padding: 10px;
   width: 160px;
   height: 170px;
