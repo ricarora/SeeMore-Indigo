@@ -85,7 +85,7 @@ describe PagesController, :type => :controller do
 
       it 'has bookis in the result when twitter is searched for "bookis"' do
         get :user_search, {provider: "Twitter", search: "bookis"}
-        expect(assigns(:results).collect {|twitter_user| twitter_user.screen_name}).to include("bookis")
+        expect(assigns(:results).collect(&:screen_name)).to include("bookis")
       end
 
       it 'has teamtreehouse in the result when vimeo is searched for treehouse' do
@@ -95,7 +95,7 @@ describe PagesController, :type => :controller do
 
       it 'has cats_of_instagram in the result when instagram is searched for "cats"' do
         get :user_search, {provider: "Instagram", search: "cats"}
-        expect(assigns(:results).collect {|instagram_user| instagram_user.username}).to include("cats_of_instagram")
+        expect(assigns(:results).collect(&:username)).to include("cats_of_instagram")
       end
     end
 
