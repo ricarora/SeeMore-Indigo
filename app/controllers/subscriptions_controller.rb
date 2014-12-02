@@ -19,8 +19,18 @@ class SubscriptionsController < ApplicationController
   def destroy
     sub_params = params[:subscription]
     subs = Subscription.where(uid: sub_params[:uid], provider: sub_params[:provider])[0]
+    puts "********************BEFORE IF CHECK***************************"
+    puts "PARAMS #{params.inspect}"
+    puts "SUBS #{subs.inspect}"
+    puts "UID #{sub_params[:uid]}"
+    puts "PROVIDER #{sub_params[:provider]}"
+    puts "CURRENT BRO #{current_bro.inspect}"
+
     if current_bro.subscriptions.include? subs
+      puts "BROSUBS1: #{current_bro.subscriptions.inspect}"
       current_bro.subscriptions.destroy(subs.id)
+      puts "BROSUBS2: #{current_bro.subscriptions.inspect}"
+      puts "INSIDE IF CHECK$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
     end
     respond_to do |format|
       format.html {render html: "unsubscribe"}
