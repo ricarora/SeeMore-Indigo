@@ -3,11 +3,11 @@
 <div class="row">
   <div class="col-md-4">
     <h2>The Deets</h2>
-    <div id="hide_profile" style="display:block">
+    <div id="display_profile" style="display:block">
     <div><strong>Username:</strong> <%= current_bro.name %></div>
     <div><strong>Email:</strong> <%= current_bro.email %></div>
     <!-- <%= button_to "Edit Profile", "#edit_profile", action:nil, style:"display:block", onclick: "toggle_visibility('edit_profile');" %> -->
-    <%= link_to "Nah brah, that's not right", "#edit_profile", class:"btn btn-warning btn-xs", role:"button", onclick:"toggle_visibility('edit_profile');"%>
+    <%= link_to "Nah brah, that's not right", "#edit_profile", class:"btn btn-warning btn-xs", role:"button" %>
     </div>
     <div id="edit_profile" style="display:none">
       <%= form_for current_bro, url: show_path do |f| %>
@@ -20,7 +20,7 @@
         <%= f.text_field :email %>
       </div>
       <div id="submit">
-        <%= f.submit "High five, brah!", :class => "btn btn-warning btn-xs" %>
+        <%= f.submit "High five, brah!", :class => "edit-profile btn btn-warning btn-xs" %>
       </div>
       <% end %>
     </div>
@@ -44,7 +44,7 @@
 </div> <!-- close row div -->
 <hr>
 <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-12">
 
     <h2> Your Bromances </h2>
       <!-- method and url here are overwritten by the ajax call and don't matter
