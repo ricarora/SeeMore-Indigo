@@ -1,6 +1,6 @@
 require 'rails_helper'
 describe PagesController, :type => :controller do
-  # before {User.create(name: "meow", email: "cat@meow.com")}
+  before(:all) { User.create(name: "meow", email: "cat@meow.com") }
   describe "#index" do
     context "user is logged out" do
       before { session[:bro_id] = nil }
@@ -9,10 +9,10 @@ describe PagesController, :type => :controller do
         expect(response).to redirect_to("/watup")
       end
     end
+
     context "user is logged in" do
+      before { session[:bro_id] = User.first.id }
       it "it is successful" do
-        user = User.create
-        session[:bro_id] = user.id
         get :index
         expect(response.status).to eq 200
       end
@@ -24,14 +24,24 @@ describe PagesController, :type => :controller do
       end
 
       it "loads the user's feed" do
-        user = User.create
+        user = User.find(session[:bro_id])
         subscription = Subscription.create
         subscription.feed_items.create
         user.subscriptions << subscription
-        session[:bro_id] = user.id
 
         get :index
         expect(assigns(:feed)).to_not be_nil
+      end
+
+      it 'adds feed_items to a user\'s twitter subscription' do
+        user = User.find(session[:bro_id])
+        subscription = Subscription.create(
+          provider: "twitter",
+          uid: "1002706964")
+        user.subscriptions << subscription
+
+        get :index
+        expect(user.feed_items).to_not be_empty
       end
     end
   end
@@ -46,10 +56,8 @@ describe PagesController, :type => :controller do
     end
 
     context "user is logged in" do
+      before { session[:bro_id] = User.first.id }
       it 'a logged in user cannot view the landing page' do
-        user = User.create
-        session[:bro_id] = user.id
-        
         get :landing
         expect(response).to redirect_to("/")
       end
@@ -59,9 +67,8 @@ describe PagesController, :type => :controller do
 
   describe  "#user_search" do
     context "user is logged in" do
+      before { session[:bro_id] = User.first.id }
       it 'renders the correct page when any provider is searched' do
-        user = User.create
-        session[:bro_id] = user.id
 
         providers = ["Twitter", "Vimeo", "Instagram"]
 
@@ -72,32 +79,23 @@ describe PagesController, :type => :controller do
       end
 
       it "populates a results array when twitter is searched" do
-        user = User.create
-        session[:bro_id] = user.id
-
         get :user_search, {provider: "Twitter", search: "bookis"}
         expect(assigns(:results)).to_not be_nil
       end
 
       it 'has bookis in the result when twitter is searched for "bookis"' do
-        user = User.create
-        session[:bro_id] = user.id
         get :user_search, {provider: "Twitter", search: "bookis"}
-        expect(assigns(:results).collect {|twitter_user| twitter_user.screen_name}).to include("bookis")
+        expect(assigns(:results).collect(&:screen_name)).to include("bookis")
       end
 
       it 'has teamtreehouse in the result when vimeo is searched for treehouse' do
-        user = User.create
-        session[:bro_id] = user.id
         get :user_search, {provider: "Vimeo", search: "teamtreehouse"}
         expect(assigns(:results).collect {|vimeo_user| vimeo_user.url.gsub("https://vimeo.com/", "")}).to include("teamtreehouse")
       end
 
       it 'has cats_of_instagram in the result when instagram is searched for "cats"' do
-        user = User.create
-        session[:bro_id] = user.id
         get :user_search, {provider: "Instagram", search: "cats"}
-        expect(assigns(:results).collect {|instagram_user| instagram_user.username}).to include("cats_of_instagram")
+        expect(assigns(:results).collect(&:username)).to include("cats_of_instagram")
       end
     end
 
