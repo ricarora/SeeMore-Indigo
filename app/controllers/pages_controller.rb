@@ -6,7 +6,11 @@ class PagesController < ApplicationController
   end
 
   def landing
-    render :layout => false
+    if current_bro
+      redirect_to root_path
+    else
+      render :layout => false
+    end
   end
 
   def user_search
