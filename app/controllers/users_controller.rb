@@ -8,7 +8,9 @@ class UsersController < ApplicationController
 
   def update
     current_bro.update(params.require(:user).permit(:name, :email))
+    # puts "********" + current_bro.inspect
     redirect_to show_path
+
   end
 
 end
