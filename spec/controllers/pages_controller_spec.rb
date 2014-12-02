@@ -32,6 +32,17 @@ describe PagesController, :type => :controller do
         get :index
         expect(assigns(:feed)).to_not be_nil
       end
+
+      it 'adds feed_items to a user\'s twitter subscription' do
+        user = User.find(session[:bro_id])
+        subscription = Subscription.create(
+          provider: "twitter",
+          uid: "1002706964")
+        user.subscriptions << subscription
+
+        get :index
+        expect(user.feed_items).to_not be_empty
+      end
     end
   end
 
